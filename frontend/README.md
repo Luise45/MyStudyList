@@ -59,16 +59,16 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 ### 📦 Repository klonen
 
 
--git clone https://github.com/Luise45/MyStudyList/tree/main/backend
--git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
+- git clone https://github.com/Luise45/MyStudyList/tree/main/backend
+- git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
 
 ---
 
 ### 🚀 Backend Setup
 
--cd MyStudyList-backend
--npm install
--Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
+- cd MyStudyList-backend
+- npm install
+- Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
 
 PORT=5000 # kann angepasst werden
 MONGO_URI=<name der eigenen Datenbank>
@@ -79,16 +79,16 @@ node app.js
 
 ### 💻 Frontend Setup
 
--cd ../frontend
--npm install
--ng serve -o
+- cd ../frontend
+- npm install
+- ng serve -o
 
 ---
 
 ### 🤖 KI & Tools
 
--ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
--DeepSeek= Code-Optimierungen, Bootsrap button/toast
+- ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
+- DeepSeek= Code-Optimierungen, Bootsrap button/toast
 
 
 ---
