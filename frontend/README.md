@@ -24,6 +24,25 @@
 | Styling    | Bootstrap 5                            |
 
 ---
+### Scheenshots
+
+
+![front](/screenshots/2.png)
+
+## delete function
+![delete](/screenshots/6.png)
+![delte action](/screenshots/8.png)
+![deleted](/screenshots/1.png)
+
+## sort function
+![sort](/screenshots/5.png)
+![sort](/screenshots/7.png)
+
+## add fucntion
+
+![add](/screenshots/3.png)
+![add](/screenshots/4.png)
+
 
 ## ⚙️ Installation & Nutzung
 
@@ -47,16 +66,38 @@ git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
 
 ### 🚀 Backend Setup
 
-cd MyStudyList/backend
-npm install
-Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
+-cd MyStudyList/backend
+-npm install
+-Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
 
-PORT=5000 # kann angepasst werden
-MONGO_URI=<name der eigenen Datenbank>
-Backend starten:
-node app.js
+-PORT=5000 # kann angepasst werden
+-MONGO_URI=<name der eigenen Datenbank>
+-Backend starten:
+-node app.js
 
 ---
+
+### 💻 Frontend Setup
+
+-cd ../frontend
+-npm install
+-ng serve -o
+
+---
+
+### 🤖 KI & Tools
+
+-ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
+-DeepSeek= Code-Optimierungen, Bootsrap button/toast
+
+### 🔗 Weitere Ressourcen
+
+-Bootstrap Navbar Docs
+-Bootstrap Buttons Docs
+-Bootstrap Toasts Docs
+
+---
+
 
 ### 💻 Frontend Setup
 
@@ -64,7 +105,10 @@ cd ../frontend
 npm install
 ng serve -o
 
+
+
 ---
+
 
 ### 🤖 KI & Tools
 
@@ -84,6 +128,7 @@ Bootstrap Toasts Docs
 ### 👩‍💻 Autorin
 
 Luise Tabatt
+
 
 
 
