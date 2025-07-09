@@ -1,59 +1,83 @@
-# Frontend
+# MyStudyList 📖📚
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+**MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle schulischen Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📘 Features
 
-```bash
-ng serve
-```
+- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen, bearbeiten und löschen  
+- **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
+- **Visuelles Feedback** – Aktionen wie das Löschen werden durch Bootstrap-Toasts bestätigt  
+- **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
+- **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Verwendete Technologien
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Bereich    | Technologie                            |
+|------------|----------------------------------------|
+| Frontend   | Angular CLI v20.0.5                    |
+| Backend    | Node.js v22.15.1, Express.js           |
+| Datenbank  | MongoDB Compass v6.0.24                |
+| Styling    | Bootstrap 5                            |
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ⚙️ Installation & Nutzung
 
-```bash
-ng generate --help
-```
+### Voraussetzungen
 
-## Building
+Bitte stelle sicher, dass folgende Tools installiert sind:
 
-To build the project run:
+- [Node.js](https://nodejs.org/)  
+- Angular CLI  
+- [MongoDB Compass](https://www.mongodb.com/products/compass) (MongoDB muss lokal oder über Atlas laufen)
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### 📦 Repository klonen
 
 ```bash
-ng e2e
-```
+git clone https://github.com/Luise45/MyStudyList/tree/main/backend
+git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+🚀 Backend Setup
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+cd MyStudyList/backend
+npm install
+Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
+
+PORT=5000 # kann angepasst werden
+MONGO_URI=<name der eigenen Datenbank>
+Backend starten:
+node app.js
+
+
+💻 Frontend Setup
+
+cd ../frontend
+npm install
+ng serve -o
+
+
+🤖 KI & Tools
+
+ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
+DeepSeek= Code-Optimierungen, Bootsrap button/toast
+
+🔗 Weitere Ressourcen
+
+Bootstrap Navbar Docs
+Bootstrap Buttons Docs
+Bootstrap Toasts Docs
+
+
+👩‍💻 Autorin
+
+Luise Tabatt
+🔗 GitHub-Profil
+
+
