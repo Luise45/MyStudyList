@@ -39,12 +39,13 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 
 ### 📦 Repository klonen
 
-```bash
+
 git clone https://github.com/Luise45/MyStudyList/tree/main/backend
 git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
 
+---
 
-🚀 Backend Setup
+### 🚀 Backend Setup
 
 cd MyStudyList/backend
 npm install
@@ -55,29 +56,34 @@ MONGO_URI=<name der eigenen Datenbank>
 Backend starten:
 node app.js
 
+---
 
-💻 Frontend Setup
+### 💻 Frontend Setup
 
 cd ../frontend
 npm install
 ng serve -o
 
+---
 
-🤖 KI & Tools
+### 🤖 KI & Tools
 
 ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
 DeepSeek= Code-Optimierungen, Bootsrap button/toast
 
-🔗 Weitere Ressourcen
+---
+
+### 🔗 Weitere Ressourcen
 
 Bootstrap Navbar Docs
 Bootstrap Buttons Docs
 Bootstrap Toasts Docs
 
+---
 
-👩‍💻 Autorin
+### 👩‍💻 Autorin
 
 Luise Tabatt
-🔗 GitHub-Profil
+
 
 
