@@ -1,0 +1,77 @@
+
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+   background-color: #a8cef4;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;         
+    font-weight: bold;       
+    color: #1f2937 !important;
+    font-family: 'Arial', sans-serif;
+  }
+
+  
+
+.container-fluid {
+    height: 90px;
+    background-color: #d7dbdd;
+  }
+  
+  body {
+    min-height: 100vh;
+}
+  
+/* tabellen container */
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    font-size: 20px;         
+    color: #1f2937;
+    font-family: 'Arial', sans-serif;
+  }
+
+   
+  /* Tabelle */
+
+  table {
+    background-color: #e9f2fb;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Tabellenzeilen  */
+
+  table tbody tr:hover {
+    background-color: #d7dbdd;
+  }
+  
+  /* Buttons */
+  .btn {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-outline-dark:hover {
+    background-color: #a8cef4;
+    outline-color:#070707;
+  }
+  
+
+
+  /* Kein Hw gefunden */
+  .text-muted {
+    text-align: center;
+    font-style: italic;
+    color: #f8f9fa;
+  }
+  

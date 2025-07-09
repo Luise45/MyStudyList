@@ -1,0 +1,62 @@
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h2 class="card-title mb-4"> Add Homework</h2>
+            <form [formGroup]="hwForm" (ngSubmit)="createHw()">
+<div class = "mb-3">
+    <label for="first_name" class="form-label">Date</label>
+    <input type="date" id="date" class="form-control" formControlName="date" required>
+</div>
+
+ <!-- Subject with Emoji -->
+ <div class="mb-3">
+    <label for="subject" class="form-label">Subject</label>
+    <div class="input-group">
+      <input type="text" id="subject" class="form-control" formControlName="subject" required>
+      <button type="button" class="btn btn-outline-secondary" (click)="toggleEmojiPicker()">😊</button>
+    </div>
+  </div>
+
+  <!-- Emoji Picker -->
+  <div *ngIf="showEmojiPicker" class="mb-3">
+    <button class="btn btn-sm me-1" *ngFor="let emoji of emojis" (click)="addEmojiToSubject(emoji)">
+      {{ emoji }}
+    </button>
+  </div>
+
+<div class = "mb-3">
+    <label for="task_type" class="form-label">Task type</label>
+    <select id="task_type" class="form-control" formControlName="task_type">
+        <option value="" disabled selected>Select task type</option>
+        <option value="Homework">Homework</option>
+        <option value="Project">Project</option>
+        <option value="Exam">Exam</option>
+        <option value="Quiz">Quiz</option>
+        <option value="Study">Study</option>
+        <option value="Practice">Practice</option>
+        <option value="Presentation">Presentation</option>
+
+      </select>
+      
+</div>
+
+<div class = "mb-3">
+    <label for="notes" class="form-label">Notes</label>
+    <input type="text" id="notes" class="form-control" formControlName="notes" >
+</div>
+
+
+<button type="submit" class="btn btn-primary" [disabled]="hwForm.invalid"> Add+ </button>
+
+
+            </form>
+        </div>
+    </div>
+
+
+  
+  
+   
