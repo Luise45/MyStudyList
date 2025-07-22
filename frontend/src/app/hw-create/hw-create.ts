@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-hw-create',
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './hw-create.html',
-  styleUrl: './hw-create.css',
+  styleUrls: ['./hw-create.css'],
   providers:[HwService]
 })
 export class HwCreate {

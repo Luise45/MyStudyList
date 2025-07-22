@@ -10,7 +10,7 @@ declare const bootstrap: any;
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './hw-list.html',
-  styleUrl: './hw-list.css'
+  styleUrls: ['./hw-list.css']
 })
 export class HwList implements OnInit {
   hws: Hw[] = [];
@@ -69,5 +69,9 @@ export class HwList implements OnInit {
 
   preventSubmit(event: Event) {
     event.preventDefault();
+  }
+
+  goHome() {
+    this.router.navigate(['/']);
   }
 }

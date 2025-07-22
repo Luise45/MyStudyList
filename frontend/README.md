@@ -27,21 +27,23 @@
 ### Scheenshots
 
 
+![home](/screenshots/1.png)
 ![front](/screenshots/2.png)
 
 ## delete function
-![delete](/screenshots/6.png)
-![delte action](/screenshots/8.png)
-![deleted](/screenshots/1.png)
+![delete](/screenshots/3..png)
+![delte action](/screenshots/4..png)
+![deleted](/screenshots/5..png)
 
 ## sort function
-![sort](/screenshots/5.png)
-![sort](/screenshots/7.png)
+![sort](/screenshots/8.png)
+![sort](/screenshots/9.png)
+![sort](/screenshots/10.png)
 
 ## add function
 
-![add](/screenshots/3.png)
-![add](/screenshots/4.png)
+![add](/screenshots/6.png)
+![add](/screenshots/7.png)
 
 
 ## ⚙️ Installation & Nutzung
