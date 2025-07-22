@@ -73,9 +73,8 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 - Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
 
 - PORT=5000 # kann angepasst werden
-- MONGO_URI=<name der eigenen Datenbank>
-- Backend starten:
-- node app.js
+- MONGO_URI= Name der Datenbank
+- Backend starten: node app.js
 
 ---
 
