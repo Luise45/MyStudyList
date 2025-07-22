@@ -30,17 +30,17 @@
 ![home](/screenshots/1.png)
 ![front](/screenshots/2.png)
 
-## delete function
+## Delete function
 ![delete](/screenshots/3..png)
 ![delte action](/screenshots/4..png)
 ![deleted](/screenshots/5..png)
 
-## sort function
+## Sort function
 ![sort](/screenshots/8.png)
 ![sort](/screenshots/9.png)
 ![sort](/screenshots/10.png)
 
-## add function
+## Add function
 
 ![add](/screenshots/6.png)
 ![add](/screenshots/7.png)
@@ -72,10 +72,10 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 - npm install
 - Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
 
-PORT=5000 # kann angepasst werden
-MONGO_URI=<name der eigenen Datenbank>
-Backend starten:
-node app.js
+- PORT=5000 # kann angepasst werden
+- MONGO_URI=<name der eigenen Datenbank>
+- Backend starten:
+- node app.js
 
 ---
 
