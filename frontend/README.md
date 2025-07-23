@@ -35,16 +35,18 @@
 ![delte action](/screenshots/4..png)
 ![deleted](/screenshots/5..png)
 
-## Sort function
-![sort](/screenshots/8.png)
-![sort](/screenshots/9.png)
-![sort](/screenshots/10.png)
+## Search function
+![search](/screenshots/8.png)
+![search](/screenshots/9.png)
+![search](/screenshots/10.png)
 
 ## Add function
 
 ![add](/screenshots/6.png)
 ![add](/screenshots/7.png)
 
+## Sort function
+![sort](/screenshots/11.png)
 
 ## ⚙️ Installation & Nutzung
 
