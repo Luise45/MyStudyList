@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Hw } from '../models/hw.model'; //import of da model
+import { environment } from '../../environments/environment';
+
+
 
 
 @Injectable({
@@ -19,6 +22,7 @@ export class HwService{
     //alle Eintraege 
 
     getHws(): Observable<Hw[]>{
+        this.http.get(`${environment.apiUrl}/endpoint`);
         return this.http.get<Hw[]>(this.apiUrl+'hws');
     }
 
