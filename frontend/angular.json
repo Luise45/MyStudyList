@@ -11,6 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
+          
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
@@ -24,14 +25,19 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+           "styles": [
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
+      "src/styles.css"
+    ],
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+    ]
           },
           "configurations": {
             "production": {
-
-              
               "budgets": [
                 {
                   "type": "initial",
@@ -49,13 +55,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -91,7 +91,9 @@
             ],
             "styles": [
               "src/styles.css"
+      
             ]
+        
           }
         }
       }

@@ -5,6 +5,7 @@ import { Hw } from '../models/hw.model';
 import { CommonModule } from '@angular/common';
 declare const bootstrap: any;
 
+
 @Component({
   selector: 'app-hw-list',
   standalone: true,
@@ -21,6 +22,24 @@ export class HwList implements OnInit {
   ngOnInit(): void {
     this.getHws();
   }
+
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  toggleSort() {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortHws();
+  }
+  
+  sortHws() {
+    this.filteredHws = [...this.filteredHws].sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+  
+      return this.sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }
+  
+
 
   getHws() {
     this.hwService.getHws().subscribe({
@@ -74,4 +93,9 @@ export class HwList implements OnInit {
   goHome() {
     this.router.navigate(['/']);
   }
+
+ 
+
+
+
 }

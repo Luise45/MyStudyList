@@ -8,15 +8,18 @@
 <body>
 
 
-  <!--frontend Liste Seite--> 
+
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
       <button class="home-btn" (click)="goHome()"> Home 🏠
       </button>
 
      
-
+    
+      
       <a class="navbar-brand">  Homework Planner 📖📚</a>
+
+     
       <form class="d-flex" role="search" (submit)="preventSubmit($event)">
         <!-- Search bar -->
         <input
@@ -33,13 +36,16 @@
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="mb-0">To-do</h2>
+     
       <a routerLink="/hws/create" class="btn btn-outline-dark">+ Add 🖊️</a> <!-- Fixed routerLink -->
     </div>
 
     <table class="table table-bordered table-hover" *ngIf="hws.length > 0">
       <thead class="table-light">
         <tr>
-          <th>Due date</th>
+          <th>Due date   <button class="btn btn-sm btn-link p-0 ms-2" (click)="toggleSort()" title="Sort by Date">
+            {{ sortDirection === 'asc' ? '⬆️' : '⬇️' }}
+          </button> </th>
           <th>Subject</th>
           <th>Task type</th>
           <th>Notes</th>
@@ -53,15 +59,18 @@
           <td>{{hw.task_type}}</td>
           <td>{{hw.notes}}</td>
           <td>
+           
             <!-- Delete button -->
             <button (click)="deleteHw(hw._id)" class="btn btn-outline-dark" title="Delete"
               style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
               ✔️
             </button>
+
           </td>
         </tr>
       </tbody>
     </table>
+   
     <p *ngIf="filteredHws.length === 0" class="text-muted">Nothing here</p>
   </div>
 
