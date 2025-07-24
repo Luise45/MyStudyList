@@ -54,7 +54,7 @@
 
 ### Voraussetzungen
 
-Bitte stelle sicher, dass folgende Tools installiert sind:
+Bitte stellen Sie sicher, dass folgende Tools installiert sind:
 
 - [Node.js](https://nodejs.org/)  
 - Angular CLI  
@@ -64,7 +64,7 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 ### 📦 Repository klonen
 
 
-- git clone git clone https://github.com/Luise45/MyStudyList.git
+- git clone https://github.com/Luise45/MyStudyList.git
 
 
 ---
