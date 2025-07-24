@@ -1,16 +1,17 @@
 # MyStudyList 📖📚
 
-**MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle schulischen Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
+**MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
 
 ---
 
 ## 📘 Features
 
-- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen, bearbeiten und löschen  
+- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen und löschen  
 - **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
 - **Visuelles Feedback** – Aktionen wie das Löschen werden durch Bootstrap-Toasts bestätigt  
 - **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
 - **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
+
 
 ---
 
@@ -46,6 +47,7 @@
 ![add](/screenshots/7.png)
 
 ## Sort function
+
 ![sort](/screenshots/11.png)
 
 ## ⚙️ Installation & Nutzung
@@ -56,26 +58,26 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 
 - [Node.js](https://nodejs.org/)  
 - Angular CLI  
-- [MongoDB Compass](https://www.mongodb.com/products/compass) (MongoDB muss lokal oder über Atlas laufen)
-
+- [MongoDB Compass](https://www.mongodb.com/products/compass) (MongoDB Compass oder Atlas)
 ---
 
 ### 📦 Repository klonen
 
 
-- git clone https://github.com/Luise45/MyStudyList/tree/main/backend
-- git clone https://github.com/Luise45/MyStudyList/tree/main/frontend
+- git clone git clone https://github.com/Luise45/MyStudyList.git
+
 
 ---
 
 ### 🚀 Backend Setup
 
-- cd MyStudyList-backend
+- cd MyStudyList
+- cd backend
 - npm install
-- Erstelle eine .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
+- .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
 
 - PORT=5000 # kann angepasst werden
-- MONGO_URI= Name der Datenbank
+- MONGO_URI= Name der persönlichen Datenbank
 - Backend starten: node app.js
 
 ---
@@ -90,8 +92,8 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 
 ### 🤖 KI & Tools
 
-- ChatGPT=  Projektplanung, Code-Optimierung (Frontend & Backend), README, Bootstrap-Hilfe
-- DeepSeek= Code-Optimierungen, Bootsrap button/toast
+- ChatGPT=  Projektplanung, Code Optimierung (Frontend & Backend), README, Bootstrap-Hilfe, list css, create css
+- DeepSeek= Code Optimierungen, Bootsrap button/toast
 
 
 ---
