@@ -10,8 +10,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HwService {
-
-  private apiUrl = environment.apiUrl;
+private apiUrl = 'https://mystudylist-8.onrender.com/api';
+  //private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
