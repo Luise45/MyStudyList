@@ -12,16 +12,9 @@ dotenv.config();
 const app = express();
 
 
-const allowedOrigins = [
-  'http://localhost:4200',
-  'http://localhost:5000',
-  'https://mystudylist.vercel.app',
-  'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app',
-  ...(process.env.FRONTEND_URLS || '')
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean)
-];
+
+
+
 
 app.use(cors({
   origin(origin, callback) {
@@ -38,12 +31,16 @@ app.use(express.json());
 
 app.use('/api/hws', hwRoutes);
 const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => {
   console.log('MongoDB connected');
+  app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
   app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
