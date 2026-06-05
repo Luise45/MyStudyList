@@ -12,12 +12,26 @@ dotenv.config();
 const app = express();
 
 
-
-
-
+const allowedOrigins = [
+  'http://localhost:4200',
+  'http://localhost:5000',
+  'https://mystudylist.vercel.app',
+  'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app',
+  ...(process.env.FRONTEND_URLS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+];
 
 app.use(cors({
-  origin: 'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app'
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error(`Origin ${origin} is not allowed by CORS`));
+  }
 }));
 app.use(express.json());
 

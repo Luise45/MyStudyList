@@ -10,8 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HwService {
-private apiUrl = 'https://mystudylist-8.onrender.com/api';
-  //private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -31,4 +30,3 @@ private apiUrl = 'https://mystudylist-8.onrender.com/api';
     return this.http.delete(`${this.apiUrl}/hws/${id}`);
   }
 }
-
