@@ -4,43 +4,31 @@ import { Observable } from 'rxjs';
 import { Hw } from '../models/hw.model'; //import of da model
 
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
-
-
-    providedIn:'root' //available for all
-
+  providedIn: 'root'
 })
+export class HwService {
 
-export class HwService{
-    private apiUrl = 'http://localhost:5000/api/'; 
-    constructor(private http: HttpClient){}
+  private apiUrl = environment.apiUrl;
 
+  constructor(private http: HttpClient) {}
 
-    //alle Eintraege 
+  getHws(): Observable<Hw[]> {
+    return this.http.get<Hw[]>(`${this.apiUrl}/hws`);
+  }
 
-    getHws(): Observable<Hw[]>{
-        return this.http.get<Hw[]>(this.apiUrl+'hws');
-    }
+  createHw(hw: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/hws`, hw);
+  }
 
-    // Eintrag erstellen
+  getHwById(id: string): Observable<Hw> {
+    return this.http.get<Hw>(`${this.apiUrl}/hws/${id}`);
+  }
 
-    createHw(hw: FormData): Observable<any> {
-        return this.http.post(this.apiUrl + 'hws', hw);
-      }
-      
-   // Eintrag mit Id erhalten
-
-    getHwById(id: string): Observable<Hw>{
-
-        return this.http.get<Hw>(`${this.apiUrl}hws/${id}`);
-    }
-
-
-    //Eintrag loeschen
-
-    deleteHw(id: string):Observable<any>{
-
-        return this.http.delete(`${this.apiUrl}hws/${id}`);
-    }
-
+  deleteHw(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/hws/${id}`);
+  }
 }
+
