@@ -11,7 +11,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+import cors from 'cors';
+
+app.use(cors({
+  origin: 'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app'
+}));
 app.use(express.json());
 
 
