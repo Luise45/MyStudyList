@@ -1,5 +1,7 @@
 # MyStudyList 📖📚
 
+Demo on: https://frontend-beojh8nla-luise-tabatts-projects.vercel.app
+
 **MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
 
 ---
