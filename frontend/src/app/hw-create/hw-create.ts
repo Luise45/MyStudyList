@@ -50,7 +50,9 @@ createHw():void{
 
 
 }
-
+ goHome() {
+    this.router.navigate(['/']);
+  }
 
 
 showEmojiPicker = false;
