@@ -1,6 +1,6 @@
 # MyStudyList 📖📚
 
-Demo on: https://frontend-beojh8nla-luise-tabatts-projects.vercel.app
+Demo on: https://frontend-3o8ceeprm-luise-tabatts-projects.vercel.app
 
 **MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
 
@@ -27,30 +27,17 @@ Demo on: https://frontend-beojh8nla-luise-tabatts-projects.vercel.app
 | Styling    | Bootstrap 5                            |
 
 ---
-### Scheenshots
+### Preview
 
 
-![home](/screenshots/1.png)
-![front](/screenshots/2.png)
+<img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 07" src="https://github.com/user-attachments/assets/f2452512-426b-4668-a342-3eafa6aa13fd" />
 
-## Delete function
-![delete](/screenshots/3..png)
-![delte action](/screenshots/4..png)
-![deleted](/screenshots/5..png)
+<img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 32" src="https://github.com/user-attachments/assets/d0c96cdf-3413-48be-946c-6555ff1cf34b" />
 
-## Search function
-![search](/screenshots/8.png)
-![search](/screenshots/9.png)
-![search](/screenshots/10.png)
+<img width="39%" height="427" alt="Screenshot 2026-06-05 at 14 52 55" src="https://github.com/user-attachments/assets/c3ff6438-7d33-4d1b-adef-315ab8ee3f2c" />
 
-## Add function
 
-![add](/screenshots/6.png)
-![add](/screenshots/7.png)
 
-## Sort function
-
-![sort](/screenshots/11.png)
 
 ## ⚙️ Installation & Nutzung
 
