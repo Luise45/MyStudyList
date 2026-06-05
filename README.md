@@ -1,4 +1,8 @@
-# MyStudyList 📖📚
+# MyStudyList 
+
+![Databse Diagram ](https://img.shields.io/badge/Node/Express-blue)
+![Databse Diagram ](https://img.shields.io/badge/Angular-yellow)
+![Databse Diagram ](https://img.shields.io/badge/MongoDB-green)
 
 Demo on: https://frontend-3o8ceeprm-luise-tabatts-projects.vercel.app
 
@@ -6,7 +10,7 @@ Demo on: https://frontend-3o8ceeprm-luise-tabatts-projects.vercel.app
 
 ---
 
-## 📘 Features
+##  Features
 
 - **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen und löschen  
 - **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
@@ -17,7 +21,7 @@ Demo on: https://frontend-3o8ceeprm-luise-tabatts-projects.vercel.app
 
 ---
 
-## 🛠️ Verwendete Technologien
+##  Verwendete Technologien
 
 | Bereich    | Technologie                            |
 |------------|----------------------------------------|
@@ -28,66 +32,27 @@ Demo on: https://frontend-3o8ceeprm-luise-tabatts-projects.vercel.app
 
 ---
 ### Preview
-
+---
+Homepage
 
 <img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 07" src="https://github.com/user-attachments/assets/f2452512-426b-4668-a342-3eafa6aa13fd" />
+
+---
+List & Add Tasks
 
 <img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 32" src="https://github.com/user-attachments/assets/d0c96cdf-3413-48be-946c-6555ff1cf34b" />
 
 <img width="39%" height="427" alt="Screenshot 2026-06-05 at 14 52 55" src="https://github.com/user-attachments/assets/c3ff6438-7d33-4d1b-adef-315ab8ee3f2c" />
 
-
-
-
-## ⚙️ Installation & Nutzung
-
-### Voraussetzungen
-
-Bitte stellen Sie sicher, dass folgende Tools installiert sind:
-
-- [Node.js](https://nodejs.org/)  
-- Angular CLI  
-- [MongoDB Compass](https://www.mongodb.com/products/compass) (MongoDB Compass oder Atlas)
 ---
 
-### 📦 Repository klonen
+###  KI & Tools
 
-
-- git clone https://github.com/Luise45/MyStudyList.git
-
+- Codex = Projektplanung, Code Optimierung (Frontend & Backend), README, Bootstrap-Hilfe, list css, create css
 
 ---
 
-### 🚀 Backend Setup
-
-- cd MyStudyList
-- cd backend
-- npm install
-- .env Datei im Backend-Verzeichnis mit folgendem Inhalt:
-
-- PORT=5000 # kann angepasst werden
-- MONGO_URI= Name der persönlichen Datenbank
-- Backend starten: node app.js
-
----
-
-### 💻 Frontend Setup
-
-- cd ../frontend
-- npm install
-- ng serve -o
-
----
-
-### 🤖 KI & Tools
-
-- ChatGPT=  Projektplanung, Code Optimierung (Frontend & Backend), README, Bootstrap-Hilfe, list css, create css
-- DeepSeek= Code Optimierungen, Bootsrap button/toast
-
-
----
-
-### 👩‍💻 Autorin
+###  Autorin
 
 Luise Tabatt
 
