@@ -7,11 +7,11 @@
   gap: 24px;
 }
 
-.hw-header,
+
 .list-card,
 .create-card {
   background: rgba(255, 255, 255, 0.9);
-  border-radius: 32px;
+  border-radius: 19px;
   box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
 }
 
@@ -42,7 +42,7 @@
 }
 
 .home-btn {
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  background-color: #587baa;
   color: white;
   padding: 12px 20px;
   box-shadow: 0 16px 40px rgba(37, 99, 235, 0.2);
@@ -55,13 +55,6 @@
   font-size: clamp(1.45rem, 2vw, 2rem);
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: #2563eb;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.8rem;
-}
 
 .header-actions {
   display: flex;
@@ -94,7 +87,7 @@
 .primary-button.small {
   padding: 12px 20px;
   color: white;
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  background-color: #587baa;
 }
 
 .list-card {
