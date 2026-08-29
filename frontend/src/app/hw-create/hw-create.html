@@ -1,13 +1,12 @@
 
 <div class="create-shell">
   <div class="create-header">
-    <button class="home-btn" (click)="goHome()">Home </button>
+    <button class="home-btn" (click)="goHome()">Home</button>
     <div>
-    
+
       <h2>Add a new task</h2>
     </div>
   </div>
-  
 
   <div class="create-card">
     <form [formGroup]="hwForm" (ngSubmit)="createHw()">
