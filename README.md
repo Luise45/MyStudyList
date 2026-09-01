@@ -4,7 +4,6 @@
 ![Databse Diagram ](https://img.shields.io/badge/Angular-yellow)
 ![Databse Diagram ](https://img.shields.io/badge/MongoDB-green)
 
-Demo on: https://frontend-qnp2cha2o-luise-tabatts-projects.vercel.app
 
 
 
@@ -37,14 +36,13 @@ Demo on: https://frontend-qnp2cha2o-luise-tabatts-projects.vercel.app
 ---
 Homepage
 
-<img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 07" src="https://github.com/user-attachments/assets/f2452512-426b-4668-a342-3eafa6aa13fd" />
+<img width="1640" height="912" alt="Screenshot (27)" src="https://github.com/user-attachments/assets/24f5c117-737e-4911-b126-b1f1c799893b" />
 
 ---
 List & Add Tasks
 
-<img width="49%" height="682" alt="Screenshot 2026-06-05 at 14 52 32" src="https://github.com/user-attachments/assets/d0c96cdf-3413-48be-946c-6555ff1cf34b" />
+<img width="1305" height="896" alt="Screenshot (28)" src="https://github.com/user-attachments/assets/5858732e-e1b6-4db7-8fcc-b1056b83da63" />
 
-<img width="39%" height="427" alt="Screenshot 2026-06-05 at 14 52 55" src="https://github.com/user-attachments/assets/c3ff6438-7d33-4d1b-adef-315ab8ee3f2c" />
 
 ---
 
