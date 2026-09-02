@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Hw } from '../models/hw.model'; //import of da model
 
 
-import { environment } from '../../environments/environment';
+import { environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

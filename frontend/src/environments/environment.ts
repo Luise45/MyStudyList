@@ -1,4 +1,8 @@
+const production = false; // toggle this (or use a build-time flag)
+
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:5000'
+  production,
+  apiUrl: production
+    ? 'https://mystudylist-backend-612429176168.europe-west1.run.app'
+    : 'http://localhost:5000'
 };
