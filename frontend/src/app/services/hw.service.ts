@@ -5,12 +5,13 @@ import { Hw } from '../models/hw.model'; //import of da model
 
 
 import { environment} from '../../environments/environment';
+import { environment as prodEnvironment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HwService {
-  private apiUrl = `${environment.apiUrl}/api`;
+  private apiUrl = `${prodEnvironment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
