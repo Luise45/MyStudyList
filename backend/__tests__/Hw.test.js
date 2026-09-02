@@ -46,4 +46,31 @@ describe('Hw Model', () => {
 
         expect(error.errors.task_type).toBeDefined();
     });
+
+    test('soll ohne notes gültig sein', () => {
+        const hw = new Hw({
+            date: new Date(),
+            subject: 'Mathematik',
+            task_type: 'Hausaufgabe'
+        });
+
+        const error = hw.validateSync();
+
+        expect(error).toBeUndefined();
+    });
+    test('soll die angegebenen Werte korrekt übernehmen', () => {
+        const date = new Date('2026-09-10');
+
+        const hw = new Hw({
+            date: date,
+            subject: 'Datenbanken',
+            task_type: 'Prüfung',
+            notes: 'SQL lernen'
+        });
+
+        expect(hw.subject).toBe('Datenbanken');
+        expect(hw.task_type).toBe('Prüfung');
+        expect(hw.notes).toBe('SQL lernen');
+        expect(hw.date).toEqual(date);
+    });
 });
