@@ -1,17 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Hw } from '../models/hw.model'; //import of da model
-
-
-import { environment} from '../../environments/environment';
-import { environment as prodEnvironment } from '../../environments/environment.prod';
+import { Hw } from '../models/hw.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HwService {
-  private apiUrl = `${prodEnvironment.apiUrl}/api`;
+  private apiUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
