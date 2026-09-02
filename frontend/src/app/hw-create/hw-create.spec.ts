@@ -1,3 +1,6 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HwCreate } from './hw-create';
@@ -8,7 +11,11 @@ describe('HwCreate', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HwCreate]
+      imports: [HwCreate],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
     })
     .compileComponents();
 
