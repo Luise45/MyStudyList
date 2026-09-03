@@ -4,9 +4,11 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
 
-import authRoutes from './routes/auth.routes';
+const authRoutes = require('./routes/authRoutes');
 
-app.use('/api/auth', authRoutes);
+
+
+
 dotenv.config();
 
 const app = express();
@@ -40,6 +42,9 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/hws', hwRoutes);
+app.use('/api/auth', authRoutes);
+
+module.exports = app;
 
 const PORT = process.env.PORT || 5000;
 
