@@ -19,7 +19,7 @@ beforeAll(async () => {
     const mongoUri = mongoServer.getUri();
 
     await mongoose.connect(mongoUri);
-});
+}, 30000);
 
 afterEach(async () => {
     await Hw.deleteMany({});
@@ -27,8 +27,11 @@ afterEach(async () => {
 
 afterAll(async () => {
     await mongoose.disconnect();
-    await mongoServer.stop();
-});
+
+    if (mongoServer) {
+        await mongoServer.stop();
+    }
+}, 30000);
 
 describe('Hw Routes Integration Tests', () => {
 
