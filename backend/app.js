@@ -3,52 +3,52 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
-const path = require('path');
+const healthRoutes = require('./routes/healthRoutes');
 
 dotenv.config();
 
-
-
 const app = express();
 
-
 const allowedOrigins = [
-  'http://localhost:4200',
-  'http://localhost:5000',
-  'https://mystudylist.vercel.app',
-  'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app',
-  ...(process.env.FRONTEND_URLS || '')
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean)
+    'http://localhost:4200',
+    'http://localhost:5000',
+    'https://mystudylist.vercel.app',
+    'https://frontend-o8f1tfmsz-luise-tabatts-projects.vercel.app',
+    ...(process.env.FRONTEND_URLS || '')
+        .split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean)
 ];
 
 app.use(cors({
-  origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
-      callback(null, true);
-      return;
-    }
+    origin(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+            return;
+        }
 
-    callback(new Error(`Origin ${origin} is not allowed by CORS`));
-  }
+        callback(new Error(`Origin ${origin} is not allowed by CORS`));
+    }
 }));
+
 app.use(express.json());
 
-
 app.use('/api/hws', hwRoutes);
+app.use('/health', healthRoutes);
+
 const PORT = process.env.PORT || 5000;
-const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
-.then(() => {
-  console.log('MongoDB connected');
-  app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-  app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-})
+    .then(() => {
+        console.log('MongoDB connected');
+
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error('MongoDB connection failed:', err);
+    });
