@@ -31,6 +31,60 @@
 | Datenbank  | MongoDB Compass v6.0.24                |
 | Styling    | Bootstrap 5                            |
 
+
+## Testing
+
+Für das Backend werden automatisierte Tests mit **Jest** und **Supertest** durchgeführt.
+
+### Backend Unit Tests
+
+Die Unit Tests überprüfen das `Hw`-Datenmodell und dessen Validierung, unter anderem:
+
+- gültige Hausaufgaben
+- fehlendes Fach (`subject`)
+- fehlendes Datum (`date`)
+- fehlender Aufgabentyp (`task_type`)
+- optionale Notizen
+
+### Backend Integration Tests
+
+Die Integration Tests überprüfen das Zusammenspiel von Express, den API-Routen,
+Mongoose und einer temporären MongoDB-Testdatenbank.
+
+Getestete Endpunkte:
+
+- `POST /api/hws`
+- `GET /api/hws`
+- `GET /api/hws/:id`
+- `DELETE /api/hws/:id`
+- Fehlerfälle wie nicht vorhandene oder ungültige IDs
+
+Für die Integration Tests wird **mongodb-memory-server** verwendet. Dadurch werden
+keine Testdaten in die produktive MongoDB-Datenbank geschrieben.
+
+### Health Check
+
+Über den Endpoint
+
+`GET /health`
+
+wird überprüft, ob das Backend und die Datenbankverbindung verfügbar sind.
+
+### Test Coverage
+
+Die Backend-Tests erreichen aktuell:
+
+- Statements: **92,68 %**
+- Branches: **100 %**
+- Functions: **100 %**
+- Lines: **92,5 %**
+
+Tests ausführen:
+
+```bash
+cd backend
+npm test
+
 ---
 ### Preview
 ---
