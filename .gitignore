@@ -1,1 +1,16 @@
+# Dependencies
 node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Test coverage
+coverage/
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
