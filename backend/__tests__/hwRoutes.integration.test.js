@@ -73,4 +73,65 @@ describe('Hw Routes Integration Tests', () => {
         expect(response.body[0].subject).toBe('Datenbanken');
     });
 
+    test('GET /api/hws/:id soll eine Hausaufgabe anhand der ID zurückgeben', async () => {
+        const hw = await Hw.create({
+            date: new Date('2026-09-10'),
+            subject: 'Programmieren',
+            task_type: 'Übung',
+            notes: 'Node.js wiederholen'
+        });
+
+        const response = await request(app)
+            .get(`/api/hws/${hw._id}`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.subject).toBe('Programmieren');
+        expect(response.body.task_type).toBe('Übung');
+    });
+
+
+    test('DELETE /api/hws/:id soll eine Hausaufgabe löschen', async () => {
+        const hw = await Hw.create({
+            date: new Date('2026-09-11'),
+            subject: 'BWL',
+            task_type: 'Hausaufgabe',
+            notes: 'Kapitel 3 lesen'
+        });
+
+        const response = await request(app)
+            .delete(`/api/hws/${hw._id}`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.message).toBe('HW deleted successfully');
+
+        const deletedHw = await Hw.findById(hw._id);
+
+        expect(deletedHw).toBeNull();
+    });
+
+    test('GET /api/hws/:id soll 404 zurückgeben, wenn die Hausaufgabe nicht existiert', async () => {
+        const id = new mongoose.Types.ObjectId();
+
+        const response = await request(app)
+            .get(`/api/hws/${id}`);
+
+        expect(response.statusCode).toBe(404);
+        expect(response.body.message).toBe('Hw not found');
+    });
+    test('DELETE /api/hws/:id soll 404 zurückgeben, wenn die Hausaufgabe nicht existiert', async () => {
+        const id = new mongoose.Types.ObjectId();
+
+        const response = await request(app)
+            .delete(`/api/hws/${id}`);
+
+        expect(response.statusCode).toBe(404);
+        expect(response.body.message).toBe('Hw not found');
+    });
+    test('GET /api/hws/:id soll bei ungültiger ID einen Fehler zurückgeben', async () => {
+        const response = await request(app)
+            .get('/api/hws/ungueltige-id');
+
+        expect(response.statusCode).toBe(500);
+        expect(response.body.error).toBeDefined();
+    });
 });
