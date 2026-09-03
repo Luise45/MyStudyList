@@ -4,6 +4,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
 
+import authRoutes from './routes/auth.routes';
+
+app.use('/api/auth', authRoutes);
 dotenv.config();
 
 const app = express();
