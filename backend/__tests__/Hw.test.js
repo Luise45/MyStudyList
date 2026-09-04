@@ -1,6 +1,7 @@
 const Hw = require('../models/Hw');
 
 describe('Hw Model', () => {
+    // Tests whether a homework task is valid when all required fields are provided.
     test('soll mit allen Pflichtfeldern gültig sein', () => {
         const hw = new Hw({
             date: new Date(),
@@ -14,6 +15,7 @@ describe('Hw Model', () => {
         expect(error).toBeUndefined();
     });
 
+    // Tests whether validation fails when the required subject field is missing.
     test('soll ohne subject ungültig sein', () => {
         const hw = new Hw({
             date: new Date(),
@@ -25,6 +27,7 @@ describe('Hw Model', () => {
         expect(error.errors.subject).toBeDefined();
     });
 
+    // Tests whether validation fails when the required date field is missing.
     test('soll ohne date ungültig sein', () => {
         const hw = new Hw({
             subject: 'Mathematik',
@@ -36,6 +39,7 @@ describe('Hw Model', () => {
         expect(error.errors.date).toBeDefined();
     });
 
+    // Tests whether validation fails when the required task type is missing.      
     test('soll ohne task_type ungültig sein', () => {
         const hw = new Hw({
             date: new Date(),
@@ -47,6 +51,7 @@ describe('Hw Model', () => {
         expect(error.errors.task_type).toBeDefined();
     });
 
+    // Tests whether notes are optional and the homework task remains valid without them.
     test('soll ohne notes gültig sein', () => {
         const hw = new Hw({
             date: new Date(),
@@ -58,6 +63,8 @@ describe('Hw Model', () => {
 
         expect(error).toBeUndefined();
     });
+
+    // Tests whether the model stores all provided values correctly.
     test('soll die angegebenen Werte korrekt übernehmen', () => {
         const date = new Date('2026-09-10');
 

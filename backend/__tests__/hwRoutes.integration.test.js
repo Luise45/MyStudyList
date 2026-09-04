@@ -13,6 +13,7 @@ app.use('/api/hws', hwRoutes);
 
 let mongoServer;
 
+// Starts a temporary MongoDB instance before the integration tests.
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
 
@@ -21,10 +22,12 @@ beforeAll(async () => {
     await mongoose.connect(mongoUri);
 }, 30000);
 
+// Removes all test data after each test to keep the tests independent.
 afterEach(async () => {
     await Hw.deleteMany({});
 });
 
+// Disconnects from MongoDB and stops the temporary test database.
 afterAll(async () => {
     await mongoose.disconnect();
 
@@ -35,6 +38,8 @@ afterAll(async () => {
 
 describe('Hw Routes Integration Tests', () => {
 
+    // Tests whether a new homework task can be created through the API
+    // and is correctly stored in the test database.
     test('POST /api/hws soll eine Hausaufgabe erstellen', async () => {
 
         const response = await request(app)
@@ -58,7 +63,7 @@ describe('Hw Routes Integration Tests', () => {
         expect(savedHw.task_type).toBe('Hausaufgabe');
     });
 
-
+    // Tests whether all stored homework tasks can be retrieved through the API.
     test('GET /api/hws soll alle Hausaufgaben zurückgeben', async () => {
 
         await Hw.create({
@@ -76,6 +81,7 @@ describe('Hw Routes Integration Tests', () => {
         expect(response.body[0].subject).toBe('Datenbanken');
     });
 
+    // Tests whether a specific homework task can be retrieved by its ID.
     test('GET /api/hws/:id soll eine Hausaufgabe anhand der ID zurückgeben', async () => {
         const hw = await Hw.create({
             date: new Date('2026-09-10'),
@@ -92,7 +98,7 @@ describe('Hw Routes Integration Tests', () => {
         expect(response.body.task_type).toBe('Übung');
     });
 
-
+    // Tests whether an existing homework task can be deleted through the API.
     test('DELETE /api/hws/:id soll eine Hausaufgabe löschen', async () => {
         const hw = await Hw.create({
             date: new Date('2026-09-11'),
@@ -111,7 +117,7 @@ describe('Hw Routes Integration Tests', () => {
 
         expect(deletedHw).toBeNull();
     });
-
+    // Tests whether the API returns 404 when a homework task does not exist.
     test('GET /api/hws/:id soll 404 zurückgeben, wenn die Hausaufgabe nicht existiert', async () => {
         const id = new mongoose.Types.ObjectId();
 
@@ -121,6 +127,7 @@ describe('Hw Routes Integration Tests', () => {
         expect(response.statusCode).toBe(404);
         expect(response.body.message).toBe('Hw not found');
     });
+    // Tests whether deleting a non-existing homework task returns 404.
     test('DELETE /api/hws/:id soll 404 zurückgeben, wenn die Hausaufgabe nicht existiert', async () => {
         const id = new mongoose.Types.ObjectId();
 
@@ -130,6 +137,7 @@ describe('Hw Routes Integration Tests', () => {
         expect(response.statusCode).toBe(404);
         expect(response.body.message).toBe('Hw not found');
     });
+    // Tests how the API handles an invalid MongoDB ID.
     test('GET /api/hws/:id soll bei ungültiger ID einen Fehler zurückgeben', async () => {
         const response = await request(app)
             .get('/api/hws/ungueltige-id');

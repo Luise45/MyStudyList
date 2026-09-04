@@ -11,6 +11,7 @@ app.use('/health', healthRoutes);
 
 describe('Health Route', () => {
 
+    // Tests whether the health endpoint returns 503 when no database is connected.
     test('soll 503 zurückgeben, wenn keine Datenbank verbunden ist', async () => {
         if (mongoose.connection.readyState !== 0) {
             await mongoose.disconnect();
@@ -24,6 +25,7 @@ describe('Health Route', () => {
         expect(response.body.database).toBe('disconnected');
     });
 
+    // Tests whether the health endpoint returns 200 when the database is connected.
     test('soll 200 zurückgeben, wenn die Datenbank verbunden ist', async () => {
         const mongoServer = await MongoMemoryServer.create();
 
