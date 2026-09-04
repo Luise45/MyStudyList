@@ -59,7 +59,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # 4. Run backend tests sequentially to avoid MongoDB Memory Server conflicts
-      - name: Run Backend Tests
-        run: npm test -- --runInBand
+      # 4. Run backend tests and check coverage sequentially
+      - name: Run Backend Tests and Check Coverage
+        run: npm run test:coverage -- --runInBand
 
