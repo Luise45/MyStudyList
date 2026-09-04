@@ -3,7 +3,7 @@ name: CI Pipeline (Testing)
 # Trigger: Whenever code is pushed or a pull request is created
 on:
   push:
-    branches: [ "main", "dev", "feature/setup-ci-and-testing" ]
+    branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main" ]
 
@@ -23,14 +23,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # IMPORTANT: Adjust this to your Node.js version (specified in package.json "engines" or simply 20)
-          cache: 'npm'
+          node-version: '20' # IMPORTANT: Adjust this to your Node.js version 
           cache-dependency-path: ./frontend/package-lock.json
 
       # 3. Install Dependencies
       - name: Install Dependencies
         run: npm ci
 
-      # 4. Run Tests (The exact same command that works locally!)
-      - name: Run Angular Tests
-        run: npx ng test --watch=false --browsers=ChromeHeadless --no-progress
+       # Run tests + generate coverage report
+      - name: Run Angular Tests with Coverage
+        run: npx ng test --watch=false --browsers=ChromeHeadless --no-progress --code-coverage
+
+      # Upload Coverage Report as Artifact (So that it can be downloaded in GitHub)
+      - name: Upload Coverage Report
+        if: always() # Also runs when tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage-report
+          path: ./frontend/coverage/
+          retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
