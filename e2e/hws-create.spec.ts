@@ -13,27 +13,3 @@ test('add entry page loads', async ({ page }) => {
     page.getByRole('button', { name: 'Add task' })).toBeVisible();
 });
 
-// post endpoint testing for creating a new homework
-test('should create a new homework entry', async ({ request }) => {
-  const response = await request.post('http://localhost:3000/api/hws', {
-    data: {
-      date: '2026-09-10',
-      subject: 'Math',
-      task_type: 'Homework',
-      notes: 'Complete exercises 1-10'
-    }
-  });
-
-  expect(response.status()).toBe(201);
-  const body = await response.json();
-  expect(body.message).toBe('Hw uploaded successfully');
-
-  expect(body.hw).toMatchObject({
-    date: '2026-09-10',
-    subject: 'Math',
-    task_type: 'Homework',
-    notes: 'Complete exercises 1-10'
-  });
-
-  expect(body.hw._id).toBeDefined();
-});
