@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
+const healthRoutes = require('./routes/healthRoutes');
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/hws', hwRoutes);
+app.use('/health', healthRoutes);
 
 const PORT = process.env.PORT || 5000;
 
