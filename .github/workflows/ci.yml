@@ -34,3 +34,32 @@ jobs:
       # 4. Run Tests (The exact same command that works locally!)
       - name: Run Angular Tests
         run: npx ng test --watch=false --browsers=ChromeHeadless --no-progress
+
+  # JOB 2: Backend Tests
+  backend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    # 1. Download code
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ./backend/package-lock.json
+
+      # 3. Install Dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Run backend tests and check coverage sequentially
+      - name: Run Backend Tests and Check Coverage
+        run: npm run test:coverage -- --runInBand
+
