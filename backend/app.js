@@ -42,17 +42,21 @@ app.use('/health', healthRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI)
+const mongoUri =
+  process.env.NODE_ENV === 'test'
+    ? process.env.MONGO_TEST_URI
+    : process.env.MONGO_URI;
+
+mongoose.connect(mongoUri)
   .then(() => {
-    console.log('MongoDB connected');
+    console.log(
+      `MongoDB connected (${process.env.NODE_ENV === 'test' ? 'test' : 'production'})`
+    );
 
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
     });
   })
-
-
-  
   .catch((error) => {
     console.error('MongoDB connection failed:', error);
     process.exit(1);

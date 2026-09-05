@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 /**
  * Read environment variables from file.
@@ -15,19 +16,15 @@ import { defineConfig, devices } from '@playwright/test';
 
 
 export default defineConfig({
-  use: {
-    baseURL: 'http://127.0.0.1:5000',
-     trace: 'on-first-retry',
-  },
 
   webServer: {
-
-  command: 'npm start',
-  cwd: './backend',
-  url: 'http://127.0.0.1:5000/api/hws',
-  reuseExistingServer: true,
-
+    command: 'npm run start:test',
+    cwd: path.resolve(__dirname, 'backend'),
+    url: 'http://127.0.0.1:5000/api/hws',
+    reuseExistingServer: false,
+    timeout: 120_000,
   },
+
   testDir: './e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
