@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './hw-create.html',
   styleUrls: ['./hw-create.css'],
-  providers:[HwService]
 })
 export class HwCreate {
 
