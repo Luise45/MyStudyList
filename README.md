@@ -3,6 +3,7 @@
 ![Databse Diagram ](https://img.shields.io/badge/Node/Express-blue)
 ![Databse Diagram ](https://img.shields.io/badge/Angular-yellow)
 ![Databse Diagram ](https://img.shields.io/badge/MongoDB-green)
+![CI Pipeline](https://github.com/Luise45/MyStudyList/actions/workflows/ci.yml/badge.svg)
 
 
 
@@ -115,8 +116,39 @@ Die Backend-Tests erreichen aktuell:
 - Lines: **92,5 %**
 
 Tests ausführen:
+```bash
 cd backend
 npm test
+```
+
+### Frontend Unit Tests
+Our frontend is tested using **Jasmine** and **Karma**. We focus on isolated unit tests for components and services:
+- **Services:** HTTP requests are intercepted and mocked using `HttpTestingController`
+- **Components:** Services are mocked using spies, and a minimal router is provided for testing
+
+**Frontend Test Coverage:**
+We currently maintain a **98% code coverage** across the frontend:
+- **Statements:** 98.36%
+- **Branches:** 78.57%
+- **Lines:** 98.27%
+- **Functions:** 96.29%
+
+### Running Tests Locally
+There are two ways to run the frontend tests, depending on your goal:
+
+**1. Development Mode (Watch Mode)**
+```bash
+cd frontend
+npm run test
+```
+
+**2. CI Mode (Single Run & Coverage)**
+
+This is the exact command used in our GitHub Actions pipeline. It is much faster, does not open a visible browser, and generates the coverage report:
+```bash
+cd frontend
+npx ng test --watch=false --browsers=ChromeHeadless --no-progress --code-coverage
+```
 
 ### e2e Tests
 
@@ -141,4 +173,13 @@ Start tests:
 ```bash
 npx playwright test
 ```
+
+---
+## Continuous Integration (CI) Pipeline
+
+To ensure code quality, prevent regressions, and automate our workflow, we have implemented a **GitHub Actions** CI pipeline. It triggers automatically on every push to `main` or `dev`, and on every Pull Request targeting `main`.
+
+### Pipeline Jobs
+1. **Frontend Tests:** Sets up Node.js, installs dependencies, runs Angular unit tests with coverage reporting, and automatically uploads the coverage report as a downloadable artifact for review.
+2. **Backend Tests:** Sets up Node.js, installs dependencies, and runs Jest tests sequentially (`--runInBand`) to ensure stability and prevent Out-Of-Memory errors in the CI environment.
 
