@@ -69,54 +69,73 @@ Everything is available on:
 
 ## Testing
 
-Für das Backend werden automatisierte Tests mit **Jest** und **Supertest** durchgeführt.
+Automated backend tests are implemented using **Jest** and **Supertest**.
 
 ### Backend Unit Tests
 
-Die Unit Tests überprüfen das `Hw`-Datenmodell und dessen Validierung, unter anderem:
+The unit tests verify the `Hw` data model and its validation rules. The following cases are tested:
 
-- gültige Hausaufgaben
-- fehlendes Fach (`subject`)
-- fehlendes Datum (`date`)
-- fehlender Aufgabentyp (`task_type`)
-- optionale Notizen
+- valid homework entries
+- missing subject (`subject`)
+- missing date (`date`)
+- missing task type (`task_type`)
+- optional notes
+- correct assignment of provided values
 
 ### Backend Integration Tests
 
-Die Integration Tests überprüfen das Zusammenspiel von Express, den API-Routen,
-Mongoose und einer temporären MongoDB-Testdatenbank.
+The integration tests verify the interaction between Express, the API routes, Mongoose, and an isolated MongoDB test database.
 
-Getestete Endpunkte:
+The following endpoints and scenarios are tested:
 
 - `POST /api/hws`
 - `GET /api/hws`
 - `GET /api/hws/:id`
 - `DELETE /api/hws/:id`
-- Fehlerfälle wie nicht vorhandene oder ungültige IDs
+- error cases such as non-existing or invalid IDs
 
-Für die Integration Tests wird **mongodb-memory-server** verwendet. Dadurch werden
-keine Testdaten in die produktive MongoDB-Datenbank geschrieben.
+The integration tests use **MongoDB Memory Server** as an isolated temporary test database. This prevents test data from being written to or deleted from the production database.
 
 ### Health Check
 
-Über den Endpoint
+The endpoint
 
 `GET /health`
 
-wird überprüft, ob das Backend und die Datenbankverbindung verfügbar sind.
+checks whether the backend is connected to the database.
+
+It returns status `200` when the database is connected and status `503` when the database is unavailable.
 
 ### Test Coverage
 
-Die Backend-Tests erreichen aktuell:
+Backend test coverage is measured using **Jest Coverage**.
 
-- Statements: **92,68 %**
-- Branches: **100 %**
-- Functions: **100 %**
-- Lines: **92,5 %**
+The current backend test coverage is:
 
-Tests ausführen:
-cd backend
-npm test
+- Statements: **92.68%**
+- Branches: **100%**
+- Functions: **100%**
+- Lines: **92.5%**
+
+A global minimum coverage threshold of **80%** is configured for statements, branches, functions, and lines. If the coverage falls below this threshold, the coverage check fails.
+
+Run the backend tests:
+
+```bash
+npm test --prefix backend -- --runInBand
+```
+
+Run the backend tests with coverage:
+
+```bash
+npm run test:coverage --prefix backend -- --runInBand
+```
+
+### Continuous Integration
+
+The backend tests and coverage check are integrated into the **GitHub Actions CI pipeline**.
+
+When the CI workflow is triggered, GitHub Actions automatically installs the required dependencies and runs the backend tests including the coverage check. If a test fails or the coverage falls below the configured threshold, the backend CI job fails.
 
 ### e2e Tests
 
