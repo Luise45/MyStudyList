@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     
     const newHw = new Hw({ date, subject, task_type, notes });
     await newHw.save();
-    res.status(201).json({ message: 'Hw uploaded successfully', hw: newHw });
+    res.status(200).json({ message: 'Hw uploaded successfully', hw: newHw });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
