@@ -61,9 +61,9 @@ firebase deploy --only hosting
 ```
 
 Everything is available on: 
-Frontend: https://project-c5432009-c36e-4cb8-b23.web.app
-Backend: https://mystudylist-backend-612429176168.europe-west1.run.app
-Backend API: https://mystudylist-backend-612429176168.europe-west1.run.app/api/hws
+- Frontend: https://project-c5432009-c36e-4cb8-b23.web.app
+- Backend: https://mystudylist-backend-612429176168.europe-west1.run.app
+- Backend API: https://mystudylist-backend-612429176168.europe-west1.run.app/api/hws
 
 --- 
 
