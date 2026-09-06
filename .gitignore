@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-
+playwright-report/
 # Environment variables
 .env
 .env.*
