@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
+const healthRoutes = require('./routes/healthRoutes');
 
 dotenv.config();
 
@@ -37,12 +38,20 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/hws', hwRoutes);
+app.use('/health', healthRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI)
+const mongoUri =
+  process.env.NODE_ENV === 'test'
+    ? process.env.MONGO_TEST_URI
+    : process.env.MONGO_URI;
+
+mongoose.connect(mongoUri)
   .then(() => {
-    console.log('MongoDB connected');
+    console.log(
+      `MongoDB connected (${process.env.NODE_ENV === 'test' ? 'test' : 'production'})`
+    );
 
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);

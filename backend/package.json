@@ -3,13 +3,25 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "start": "node app.js",
+    "start:test": "cross-env NODE_ENV=test node app.js"
   },
   "keywords": [],
   "author": "Luise Tabatt",
   "license": "ISC",
   "description": "",
+  "jest": {
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  }
+},
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
@@ -17,5 +29,10 @@
     "mongodb-memory-server": "^11.2.0",
     "mongoose": "^8.16.1",
     "multer": "^2.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "jest": "^30.5.1",
+    "supertest": "^7.2.2"
   }
 }

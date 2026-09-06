@@ -1,1 +1,22 @@
+# Dependencies
 node_modules/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Test coverage
+coverage/
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
