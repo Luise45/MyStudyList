@@ -8,7 +8,7 @@ const hwSchema = new mongoose.Schema({
 
    
     date: { type: Date, required: true},
-    subject: { type: String, required: true},
+    subject: { type: String, required: false},
     task_type: { type: String, required: true},
     notes: { type: String}
     
