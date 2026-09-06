@@ -99,8 +99,5 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
-      - name: Start Backend
-        run: npm run start:test &
-
       - name: Run E2E Tests
-        run: npx playwright test
+        run: npx playwright test --config=../playwright.config.ts
