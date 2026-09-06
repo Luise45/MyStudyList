@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
-      MONGO_URI_TEST: ${{ secrets.MONGO_URI_TEST }}
+      MONGO_TEST_URI: ${{ secrets.MONGO_TEST_URI }}
 
     steps:
       - name: Checkout Code
