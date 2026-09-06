@@ -75,6 +75,9 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      MONGO_URI_TEST: ${{ secrets.MONGO_URI_TEST }}
 
     steps:
       - name: Checkout Code
