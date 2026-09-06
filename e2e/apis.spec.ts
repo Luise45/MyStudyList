@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 
 // post endpoint testing for creating a new homework
 test('should create a new homework entry', async ({ request }) => {
-  const response = await request.post('http://127.0.0.1:5000/api/hws', {
+const response = await request.post('http://127.0.0.1:5000/api/hws', {
     data: {
       date: '2026-09-10',
       subject: 'Math',
@@ -23,8 +23,8 @@ test('should create a new homework entry', async ({ request }) => {
 
 // GET endpooint testing
   test('GET / - returns all HW entries', async ({ request }) => {
-    const response = await request.get('http://127.0.0.1:5000/api/hws');
-    expect(response.status()).toBe(200);
+  const response = await request.get('http://127.0.0.1:5000/api/hws');
+  expect(response.status()).toBe(200);
     const body = await response.json();
     expect(Array.isArray(body)).toBe(true);
   });
