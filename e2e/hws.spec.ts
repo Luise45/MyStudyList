@@ -7,9 +7,10 @@ await page.getByRole('button', { name: 'Home' }).click();
 }); 
 
 // Does the button add task work correctly?
-test("Open hws page and click the button to add task", async ({page}) => {
-await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/hws');
-await page.getByRole('button', { name: '+ Add Task' }).click();
-}); 
+test("Open hws page and click the button to add task", async ({ page }) => {
+  await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/hws');
+  await page.getByRole('link', { name: '+ Add task' }).click();
+  await expect(page).toHaveURL(/\/hws\/create/);
+});
 
 
