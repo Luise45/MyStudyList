@@ -19,7 +19,6 @@
 - **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
 - **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
 
-
 ---
 
 ##  Verwendete Technologien
@@ -31,8 +30,42 @@
 | Datenbank  | MongoDB Compass v6.0.24                |
 | Styling    | Bootstrap 5                            |
 
+--- 
+
 ## Deployment
 
+The frontend is hosted with Firebase Hosting, while the backend API runs as a containerized service on Google Cloud Run. The MongoDB database remains hosted on MongoDB Atlas.
+
+### Manual Deployment Workflow
+At the moment, deployment is performed manually in Google Cloud terminal: 
+```bash
+cd MyStudyList
+git pull
+```
+
+Backend:
+```bash
+cd backend
+gcloud run deploy mystudylist-backend \
+  --source . \
+  --region europe-west1 \
+  --allow-unauthenticated
+```
+
+Frontend:
+```bash
+cd frontend
+npm ci
+npm run build
+firebase deploy --only hosting
+```
+
+Everything is available on: 
+Frontend: https://project-c5432009-c36e-4cb8-b23.web.app
+Backend: https://mystudylist-backend-612429176168.europe-west1.run.app
+Backend API: https://mystudylist-backend-612429176168.europe-west1.run.app/api/hws
+
+--- 
 
 ## Testing
 
@@ -87,6 +120,25 @@ npm test
 
 ### e2e Tests
 
+For the end-to-end testing of the homework planner, **Playwright** was used. The purpose of these tests was to verify that important parts of the homework planner work correctly.
+
+#### API Testing
+Playwright tests exist for the get, post and delete endpoints of the homework planning function. These tests send HTTP requests directly to the backend and check whether the server returns the expected status codes and data. For those test a mongoDB test database is used. 
+The tests include: 
+- creating homework, 
+- retrieving homework entries or a specific one by id, 
+- handling non existing homework entry
+- deleting a homework entry. 
+
+#### Frontend Testing
+Playwright was also used to test important elements and navigation on the homepage, the planner page and the create new entry page. These tests open the deployed application in a browser and interact with it in a similar way to a real user. The tests mainly check that buttons are available and clickable, the table headings are displayed, the headings of pages show and that search fields are visible. The frontend tests are executed against the deployed version of the application.
+
+#### Test Environment
+For the API tests, Playwright is configured to automatically start the backend using: npm run start:test
+The test server runs locally on port 5000. 
 
 Start tests: 
+```bash
 npx playwright test
+```
+
