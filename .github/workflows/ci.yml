@@ -73,7 +73,6 @@ jobs:
       - name: Run Backend Tests and Check Coverage
         run: npm run test:coverage -- --runInBand
 
-    # JOB 3: E2E Tests
   e2e-tests:
     runs-on: ubuntu-latest
 
@@ -84,18 +83,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: ./backend/package-lock.json
+        node-version: '22'
 
+    # Backend needs its dependencies so the server can run
       - name: Install Backend Dependencies
         working-directory: ./backend
         run: npm ci
 
-      - name: Install Playwright
+    # Playwright is installed in the project root
+      - name: Install E2E Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run E2E Tests
         run: npx playwright test
+            
 
 
