@@ -31,6 +31,8 @@
 | Datenbank  | MongoDB Compass v6.0.24                |
 | Styling    | Bootstrap 5                            |
 
+## Deployment
+
 
 ## Testing
 
@@ -80,35 +82,11 @@ Die Backend-Tests erreichen aktuell:
 - Lines: **92,5 %**
 
 Tests ausführen:
-
-```bash
 cd backend
 npm test
 
----
-### Preview
----
-Homepage
-
-<img width="1640" height="912" alt="Screenshot (27)" src="https://github.com/user-attachments/assets/24f5c117-737e-4911-b126-b1f1c799893b" />
-
----
-List & Add Tasks
-
-<img width="1305" height="896" alt="Screenshot (28)" src="https://github.com/user-attachments/assets/5858732e-e1b6-4db7-8fcc-b1056b83da63" />
+### e2e Tests
 
 
----
-
-###  KI & Tools
-
-- Codex = Projektplanung, Code Optimierung (Frontend & Backend), README, Bootstrap-Hilfe, list css, create css
-
----
-
-###  Autorin
-
-Luise Tabatt
-
-
-
+Start tests: 
+npx playwright test
