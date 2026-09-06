@@ -24,17 +24,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20' # IMPORTANT: Adjust this to your Node.js version 
+          cache: 'npm'
           cache-dependency-path: ./frontend/package-lock.json
 
       # 3. Install Dependencies
       - name: Install Dependencies
         run: npm ci
 
-       # Run tests + generate coverage report
+      # 4. Run tests + generate coverage report
       - name: Run Angular Tests with Coverage
         run: npx ng test --watch=false --browsers=ChromeHeadless --no-progress --code-coverage
 
-      # Upload Coverage Report as Artifact (So that it can be downloaded in GitHub)
+      # 5. Upload Coverage Report as Artifact (So that it can be downloaded in GitHub)
       - name: Upload Coverage Report
         if: always() # Also runs when tests fail
         uses: actions/upload-artifact@v4
@@ -42,3 +43,22 @@ jobs:
           name: frontend-coverage-report
           path: ./frontend/coverage/
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
+   # JOB 2: Backend Tests
+  backend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ./backend/package-lock.json
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Backend Tests and Check Coverage
+        run: npm run test:coverage -- --runInBand
