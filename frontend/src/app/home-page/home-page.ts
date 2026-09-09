@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'home-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, HttpClient],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home-page.html',
   styleUrls: ['./home-page.css']
 })
@@ -19,7 +19,7 @@ export class HomePage {
   message = '';
   isRegistering = false;
 
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'http://localhost:5000/api/auth';
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -32,8 +32,6 @@ export class HomePage {
     }).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-
-        // Fine for a quick testing/demo setup.
         localStorage.setItem('token', response.token);
 
         this.router.navigate(['hws']);
