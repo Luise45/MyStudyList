@@ -16,7 +16,6 @@ router.post('/register', async (req, res) => {
         message: 'Email and password are required'
       });
     }
-
     // Check if user already exists
     const existingUser = await User.findOne({ email });
 
@@ -25,11 +24,8 @@ router.post('/register', async (req, res) => {
         message: 'User already exists'
       });
     }
-
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
     const user = await User.create({
       email,
       password: hashedPassword
@@ -44,9 +40,7 @@ router.post('/register', async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-
-    res.status(500).json({
-      message: 'Server error'
+    res.status(500).json({ message: 'Server error'
     });
   }
 });
@@ -64,7 +58,6 @@ router.post('/login', async (req, res) => {
 
     // Find user
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(401).json({
         message: 'Invalid email or password'
@@ -76,7 +69,6 @@ router.post('/login', async (req, res) => {
       password,
       user.password
     );
-
     if (!passwordMatches) {
       return res.status(401).json({
         message: 'Invalid email or password'
@@ -86,8 +78,7 @@ router.post('/login', async (req, res) => {
     // Create JWT
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET || 'test-secret',
-      { expiresIn: '1h' }
+      process.env.JWT_SECRET || 'test-secret', { expiresIn: '1h' }
     );
 
     res.json({

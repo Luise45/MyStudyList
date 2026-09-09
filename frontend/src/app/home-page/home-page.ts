@@ -52,7 +52,7 @@ export class HomePage {
       password: this.password
     }).subscribe({
       next: () => {
-        this.message = 'Account created! You can now log in.';
+        this.message = 'Account created!';
         this.isRegistering = false;
         this.password = '';
       },
