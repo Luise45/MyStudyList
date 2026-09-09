@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const hwRoutes = require('./routes/hwRoutes');
 const healthRoutes = require('./routes/healthRoutes');
-
+const authRoutes = require('./routes/authRoutes');
 dotenv.config();
 
 const app = express();
@@ -39,6 +39,7 @@ app.use(express.json());
 
 app.use('/api/hws', hwRoutes);
 app.use('/health', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
