@@ -86,7 +86,49 @@
   line-height: 1.75;
 }
 
+.auth-box {
+  margin-top: 2rem;
+  max-width: 400px;
+}
 
+.auth-box h2 {
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.auth-message {
+  margin-top: 1rem;
+}
+
+.switch-button {
+  margin-top: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 @media (max-width: 900px) {
   .hero-section {
