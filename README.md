@@ -200,3 +200,54 @@ To ensure code quality, prevent regressions, and automate our workflow, we have 
 1. **Frontend Tests:** Sets up Node.js, installs dependencies, runs Angular unit tests with coverage reporting, and automatically uploads the coverage report as a downloadable artifact for review.
 2. **Backend Tests:** Sets up Node.js, installs dependencies, and runs Jest tests sequentially (`--runInBand`) to ensure stability and prevent Out-Of-Memory errors in the CI environment.
 
+
+### Smoke Tests
+
+Smoke tests are used to quickly verify whether the most important parts of the application are available and working after a deployment or code change.
+
+For MyStudyList, the smoke tests focus on critical functionality such as:
+
+- checking whether the frontend is reachable
+- checking whether the backend API is reachable
+- checking the `/health` endpoint
+- verifying that the database connection is available
+- checking whether important pages such as the homework list can be opened
+
+Smoke tests are intended to be fast and only cover the most important functionality. They do not replace the existing unit, integration or end-to-end tests.
+
+### Flaky Test Strategy
+
+A flaky test is a test that sometimes passes and sometimes fails without a relevant change in the application code.
+
+To keep our automated tests stable and reliable, we use the following strategy:
+
+- **Test isolation:** Tests should be independent from each other. Each test should create the data it needs and clean it up afterwards.
+
+- **Isolated test database:** Backend integration tests use `mongodb-memory-server` as a temporary MongoDB test database. Test data is removed after each test so that tests do not influence each other.
+
+- **Sequential backend execution:** Jest backend tests are executed with `--runInBand`. This runs the tests sequentially and reduces possible conflicts when using the temporary MongoDB environment.
+
+- **Mocked frontend dependencies:** Angular unit tests use mocked dependencies and Angular testing utilities such as `provideHttpClientTesting()` to reduce dependencies on the real backend and external services.
+
+- **Reduced parallel execution in CI:** Playwright uses one worker in CI to reduce conflicts caused by parallel test execution.
+
+- **Retries in CI:** Playwright allows up to two retries in the CI environment. Retries are used only as a safety mechanism and are not considered a permanent solution for unstable tests.
+
+- **Avoid fixed waiting times:** Playwright tests should wait for actual conditions, such as an element becoming visible or a URL changing, instead of using fixed waiting times.
+
+- **Independent test data:** API tests should create the data they require themselves and clean it up afterwards instead of depending on an existing database state.
+
+- **External dependencies:** Some E2E tests run against the deployed application. Network, hosting or loading issues should therefore also be considered when investigating inconsistent failures.
+
+#### Handling a Flaky Test
+
+If a test behaves inconsistently, we follow these steps:
+
+1. Reproduce the failure.
+2. Check logs and test reports.
+3. Investigate timing issues, shared test data, database state, external dependencies and parallel execution.
+4. Fix the underlying cause.
+5. Run the test again to verify that it behaves consistently.
+
+Retries are not considered a permanent solution. The goal is to fix the cause of flaky behavior so that failed CI tests remain reliable and meaningful.
+
