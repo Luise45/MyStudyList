@@ -43,7 +43,16 @@ jobs:
           name: frontend-coverage-report
           path: ./frontend/coverage/
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
- 
+          
+      # 6. Upload frontend coverage to Codecov
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # Angular creates an lcov.info file by default:
+          files: ./frontend/coverage/lcov.info 
+          flags: frontend
+          fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
  
    # JOB 2: Backend Tests
   backend-tests:
@@ -72,6 +81,15 @@ jobs:
       # 4. Run backend tests and check coverage sequentially
       - name: Run Backend Tests and Check Coverage
         run: npm run test:coverage -- --runInBand
+
+      # 5. Upload backend coverage to Codecov
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./backend/coverage/lcov.info # Path to Jest coverage file
+          flags: backend
+          fail_ci_if_error: false
 
   e2e-tests:
     runs-on: ubuntu-latest
