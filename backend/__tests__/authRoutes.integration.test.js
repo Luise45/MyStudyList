@@ -14,16 +14,19 @@ app.use('/api/auth', authRoutes);
 
 let mongoServer;
 
+// Start an isolated in-memory MongoDB instance before running the tests
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
 
     await mongoose.connect(mongoServer.getUri());
 }, 30000);
 
+// Remove test data after each test to keep the tests independent
 afterEach(async () => {
     await User.deleteMany({});
 });
 
+// Close the database connection and stop the test database
 afterAll(async () => {
     await mongoose.disconnect();
 
@@ -34,6 +37,7 @@ afterAll(async () => {
 
 describe('Authentication Integration Tests', () => {
 
+    // Verify that a new user can be registered successfully
     test('POST /api/auth/register soll einen neuen User registrieren', async () => {
         const response = await request(app)
             .post('/api/auth/register')
@@ -46,13 +50,16 @@ describe('Authentication Integration Tests', () => {
         expect(response.body.message).toBe('User registered successfully');
         expect(response.body.user.email).toBe('test@example.com');
 
+        // Verify that the user was actually stored in the database
         const savedUser = await User.findOne({
+
             email: 'test@example.com'
         });
 
         expect(savedUser).not.toBeNull();
     });
 
+    // Verify that passwords are stored as hashes instead of plain text
     test('Passwort soll beim Registrieren gehasht gespeichert werden', async () => {
         await request(app)
             .post('/api/auth/register')
@@ -67,6 +74,7 @@ describe('Authentication Integration Tests', () => {
 
         expect(savedUser.password).not.toBe('password123');
 
+        // Verify that the original password matches the stored hash
         const passwordMatches = await bcrypt.compare(
             'password123',
             savedUser.password
@@ -75,6 +83,7 @@ describe('Authentication Integration Tests', () => {
         expect(passwordMatches).toBe(true);
     });
 
+    // Registration must fail when the email is missing
     test('Registrierung ohne Email soll 400 zurückgeben', async () => {
         const response = await request(app)
             .post('/api/auth/register')
@@ -87,6 +96,7 @@ describe('Authentication Integration Tests', () => {
             .toBe('Email and password are required');
     });
 
+    // Registration must fail when the password is missing
     test('Registrierung ohne Passwort soll 400 zurückgeben', async () => {
         const response = await request(app)
             .post('/api/auth/register')
@@ -99,6 +109,7 @@ describe('Authentication Integration Tests', () => {
             .toBe('Email and password are required');
     });
 
+    // Prevent registration with an email address that already exists
     test('Doppelte Email soll 400 zurückgeben', async () => {
         await request(app)
             .post('/api/auth/register')
@@ -118,6 +129,7 @@ describe('Authentication Integration Tests', () => {
         expect(response.body.message).toBe('User already exists');
     });
 
+    // Verify successful login and JWT creation
     test('POST /api/auth/login soll einen User erfolgreich einloggen', async () => {
         await request(app)
             .post('/api/auth/register')
@@ -139,6 +151,7 @@ describe('Authentication Integration Tests', () => {
         expect(response.body.user.email).toBe('test@example.com');
     });
 
+    // Login must fail when the password is incorrect
     test('Login mit falschem Passwort soll 401 zurückgeben', async () => {
         await request(app)
             .post('/api/auth/register')
@@ -159,6 +172,7 @@ describe('Authentication Integration Tests', () => {
             .toBe('Invalid email or password');
     });
 
+    // Login must fail when no user exists for the provided email
     test('Login mit unbekannter Email soll 401 zurückgeben', async () => {
         const response = await request(app)
             .post('/api/auth/login')
@@ -172,6 +186,7 @@ describe('Authentication Integration Tests', () => {
             .toBe('Invalid email or password');
     });
 
+    // Login must fail when the email is missing
     test('Login ohne Email soll 400 zurückgeben', async () => {
         const response = await request(app)
             .post('/api/auth/login')
