@@ -11,11 +11,73 @@
           Plan homework, projects and exams in one calm place. 
           MyStudyList helps you keep every task visible and organized.
         </p>
-        <div class="hero-actions">
-          <button class="primary-button" (click)="goToTable()">Go to List</button>
-        </div>
+
+ <div class="auth-box">
+
+        <h2>
+          {{ isRegistering ? 'Create Account' : 'Login' }}
+        </h2>
+
+        <form (ngSubmit)="submit()">
+
+          <div class="form-group">
+            <label for="email">Email</label>
+
+            <input
+              id="email"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <input
+              id="password"
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Password"
+              required
+            >
+          </div>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            {{ isRegistering ? 'Register' : 'Login' }}
+          </button>
+
+        </form>
+
+        <p
+          *ngIf="message"
+          class="auth-message"
+        >
+          {{ message }}
+        </p>
+
+        <button
+          type="button"
+          class="switch-button"
+          (click)="toggleMode()"
+        >
+          {{
+            isRegistering
+              ? 'Already have an account? Login'
+              : 'No account yet? Register'
+          }}
+        </button>
+
       </div>
-    </main>
+
+    </div>
+  </main>
 
     <section class="feature-panel">
       <div class="feature-intro">

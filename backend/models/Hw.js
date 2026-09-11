@@ -11,10 +11,14 @@ const hwSchema = new mongoose.Schema({
     subject: { type: String, required: true},
     task_type: { type: String, required: true},
     notes: { type: String}
-    
-}, {
+
+}, 
+
+{
 
     timestamps: true
-});
+}
+
+);
 
 module.exports = mongoose.model('Hw', hwSchema);
