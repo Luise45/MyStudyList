@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'home-page',
@@ -19,7 +20,7 @@ export class HomePage {
   message = '';
   isRegistering = false;
 
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = environment.apiUrl;
 
   constructor(private router: Router, private http: HttpClient) {}
 
