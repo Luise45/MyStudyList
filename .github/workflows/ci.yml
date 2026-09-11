@@ -50,8 +50,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # Angular creates an lcov.info file by default:
-          files: ./frontend/coverage/**/lcov.info # <--- THIS IS CORRECT (recursively searches for lcov.info in all subfolders of coverage)
-          flags: frontend
+          files: ./coverage/frontend/lcov.info 
           fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
  
    # JOB 2: Backend Tests
@@ -87,7 +86,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./backend/coverage/lcov.info # Path to Jest coverage file
+          files: ./coverage/lcov.info # Path to Jest coverage file
           flags: backend
           fail_ci_if_error: false
 
