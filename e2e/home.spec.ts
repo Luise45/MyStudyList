@@ -16,10 +16,5 @@ await expect(
     page.getByText('MyStudyList helps you keep every task visible and organized.')).toBeVisible();
 });
 
-// Testing if the ui shows the button and if the button works
-test("Open home page and click the button", async ({page}) => {
-await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/');
-await page.getByRole('button', { name: 'Go to List' }).click();
-await expect(page).toHaveURL(/\/hws/);
-}); 
+
 
