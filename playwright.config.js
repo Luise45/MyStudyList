@@ -21,7 +21,7 @@ export default defineConfig({
     command: 'npm run start:test',
     cwd: path.resolve(__dirname, 'backend'),
     url: 'http://127.0.0.1:5000/api/hws',
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     timeout: 120_000,
   },
 
