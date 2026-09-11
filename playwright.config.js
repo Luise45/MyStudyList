@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+// @ts-ignore
 import path from 'path';
+
 
 /**
  * Read environment variables from file.
@@ -19,10 +21,13 @@ export default defineConfig({
 
   webServer: {
     command: 'npm run start:test',
+    // @ts-ignore
     cwd: path.resolve(__dirname, 'backend'),
     url: 'http://127.0.0.1:5000/api/hws',
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 120_000,
+     stdout: 'pipe',
+  stderr: 'pipe',
   },
 
   testDir: './e2e',
