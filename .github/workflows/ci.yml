@@ -49,7 +49,8 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/frontend/lcov.info # Path to Karma coverage file
+          # Path from the ROOT directory!
+          files: ./frontend/coverage/frontend/lcov.info # Path to Karma coverage file
           flags: frontend
           fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
  
