@@ -27,7 +27,7 @@ export class HomePage {
  login() {
     this.message = '';
 
-    this.http.post<any>(`${this.apiUrl}/login`, {
+    this.http.post<any>(`${this.apiUrl}/api/auth/login`, {
       email: this.email,
       password: this.password
     }).subscribe({
@@ -48,7 +48,7 @@ export class HomePage {
   register() {
     this.message = '';
 
-    this.http.post<any>(`${this.apiUrl}/register`, {
+    this.http.post<any>(`${this.apiUrl}/api/auth/register`, {
       email: this.email,
       password: this.password
     }).subscribe({
