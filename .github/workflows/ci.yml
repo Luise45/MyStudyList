@@ -49,9 +49,10 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # Angular creates an lcov.info file by default:
-          files: ./coverage/frontend/lcov.info 
+          # No fixed path - Codecov automatically searches for the coverage files
+          flags: frontend
           fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
+          verbose: true # For debugging purposes, set to false in production, shows detailed logs of the upload process
  
    # JOB 2: Backend Tests
   backend-tests:
