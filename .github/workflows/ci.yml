@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage-report
-          path: coverage/ # IMPORTANT: Since the working directory is ./frontend, "coverage/" is sufficient
+          path: ./frontend/coverage/ 
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
           
       # 6. Upload frontend coverage to Codecov
