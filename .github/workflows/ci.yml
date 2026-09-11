@@ -1,4 +1,4 @@
-name: CI Pipeline (Testing)
+name: CI Pipeline (Testing & Coverage)
 
 # Trigger: Whenever code is pushed or a pull request is created
 on:
@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage-report
-          path: ./frontend/coverage/
+          path: coverage/ # IMPORTANT: Since the working directory is ./frontend, "coverage/" is sufficient
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
           
       # 6. Upload frontend coverage to Codecov
@@ -49,10 +49,9 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # No fixed path - Codecov automatically searches for the coverage files
+          files: ./coverage/lcov.info # Path to Karma coverage file
           flags: frontend
           fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
-          verbose: true # For debugging purposes, set to false in production, shows detailed logs of the upload process
  
    # JOB 2: Backend Tests
   backend-tests:
