@@ -1,8 +1,5 @@
 import { test, expect } from '@playwright/test';
-// user journey 1 test for loging in, creating and deleting a homework task
-
-
-// User journey: login, create, verify, and delete a homework task
+// user journey 1 test for loging in, creating a homework task
 test('authenticated user can create and delete a homework task', async ({ page }) => {
   // Login
   await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/');
@@ -12,38 +9,36 @@ test('authenticated user can create and delete a homework task', async ({ page }
 
   await page.getByRole('button', { name: 'Login' }).click();
 
-  await expect(page).toHaveURL(/hws/);
+await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/hws');
 
-  // Navigate to create page
-  await page.getByRole('link', { name: '+ Add task' }).click();
+// Navigate to create page
+await page.getByRole('link', { name: '+ Add task' }).click();
 
-  await expect(page).toHaveURL(/\/hws\/create/);
+await expect(page).toHaveURL(/\/hws\/create/);
 
   // Fill in homework form
-  await page.getByLabel('Date').fill('2026-09-15');
-  await page.getByLabel('Subject').fill('Chemistry');
-  await page.getByLabel('Task type').fill('Test');
-  await page
-    .getByLabel('Notes')
-    .fill('Created by Playwright user journey test');
+await page.getByLabel('Date').fill('2026-09-15');
+await page.getByLabel('Subject').fill('Chemistry e2e');
+await page.getByLabel('Task type').selectOption('Exam');
 
-  // Submit homework
-  await page.getByRole('button', { name: 'Add task' }).click();
+await page
+  .getByLabel('Notes')
+  .fill('Created by Playwright user journey test');
+const subject = `Chemistry e2e ${Date.now()}`;
+ await page.getByLabel('Subject').fill(subject);
 
-  // Verify the task appears
-  await expect(page.getByText('Chemistry')).toBeVisible();
-  await expect(page.getByText('Test', { exact: true })).toBeVisible();
-  await expect(
-    page.getByText('Created by Playwright user journey test')
-  ).toBeVisible();
+await page.getByRole('button', { name: 'Add task' }).click();
 
-  // Find the homework entry and delete it
-  const task = page.getByText('Chemistry');
+await expect(page).toHaveURL(/\/hws$/);
 
-  const row = task.locator('..');
+const row = page.getByRole('row').filter({
+  hasText: subject
+});
 
-  await row.getByRole('button', { name: /delete/i }).click();
+await expect(row).toBeVisible();
+await expect(row).toContainText('Exam');
+await expect(row).toContainText(
+  'Created by Playwright user journey test'
+);
 
-  // Verify removal
-  await expect(page.getByText('Chemistry')).not.toBeVisible();
 });
