@@ -2,14 +2,14 @@ import { test, expect } from '@playwright/test';
 // user journey 1 test for loging in, creating a homework task
 test('authenticated user can create and delete a homework task', async ({ page }) => {
   // Login
-  await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/');
+  await page.goto('/');
 
   await page.getByLabel('Email').fill('e2e-test@example.com');
   await page.getByLabel('Password').fill('test-password');
 
   await page.getByRole('button', { name: 'Login' }).click();
 
-await page.goto('https://project-c5432009-c36e-4cb8-b23.web.app/hws');
+await page.goto('/hws');
 
 // Navigate to create page
 await page.getByRole('link', { name: '+ Add task' }).click();
@@ -29,7 +29,7 @@ const subject = `Chemistry e2e ${Date.now()}`;
 
 await page.getByRole('button', { name: 'Add task' }).click();
 
-await expect(page).toHaveURL(/\/hws$/);
+await expect(page).toHaveURL(/\/hws/);
 
 const row = page.getByRole('row').filter({
   hasText: subject
