@@ -113,10 +113,10 @@ Backend test coverage is measured using **Jest Coverage**.
 
 The current backend test coverage is:
 
-- Statements: **92.68%**
+- Statements: **91.02%**
 - Branches: **100%**
 - Functions: **100%**
-- Lines: **92.5%**
+- Lines: **90.9%**
 
 A global minimum coverage threshold of **80%** is configured for statements, branches, functions, and lines. If the coverage falls below this threshold, the coverage check fails.
 
@@ -132,11 +132,29 @@ Run the backend tests with coverage:
 npm run test:coverage --prefix backend -- --runInBand
 ```
 
+### Authentication Tests
+
+Authentication is covered by unit and integration tests.
+
+The tests verify:
+
+- user model validation
+- successful user registration
+- password hashing
+- handling of duplicate email addresses
+- successful login and JWT creation
+- incorrect passwords
+- unknown users
+- missing login or registration credentials
+
+The authentication integration tests use **MongoDB Memory Server** to provide an isolated test database.
+
 ### Continuous Integration
 
 The backend tests and coverage check are integrated into the **GitHub Actions CI pipeline**.
 
 When the CI workflow is triggered, GitHub Actions automatically installs the required dependencies and runs the backend tests including the coverage check. If a test fails or the coverage falls below the configured threshold, the backend CI job fails.
+
 
 ### Frontend Unit Tests
 Our frontend is tested using **Jasmine** and **Karma**. We focus on isolated unit tests for components and services:
@@ -203,17 +221,45 @@ To ensure code quality, prevent regressions, and automate our workflow, we have 
 
 ### Smoke Tests
 
-Smoke tests are used to quickly verify whether the most important parts of the application are available and working after a deployment or code change.
+Smoke tests are used to quickly verify whether the most important parts of the application are available and working.
 
-For MyStudyList, the smoke tests focus on critical functionality such as:
+#### Backend Smoke Tests
 
-- checking whether the frontend is reachable
-- checking whether the backend API is reachable
-- checking the `/health` endpoint
-- verifying that the database connection is available
-- checking whether important pages such as the homework list can be opened
+The backend smoke tests use Jest, Supertest and MongoDB Memory Server to verify critical backend functionality:
 
-Smoke tests are intended to be fast and only cover the most important functionality. They do not replace the existing unit, integration or end-to-end tests.
+- `GET /health` verifies that the backend and database are available.
+- `GET /api/hws` verifies that the homework API is reachable.
+- `POST /api/hws` verifies that a homework entry can be created.
+- `POST /api/auth/login` verifies that the login API is reachable.
+- `POST /api/auth/register` verifies that the registration API is reachable.
+
+Run the backend smoke tests with:
+
+```bash
+cd backend
+npm test -- --runInBand smoke.test.js
+```
+
+#### Frontend Smoke Tests
+
+The frontend smoke tests use Playwright and run against the deployed application. They verify that:
+
+- the home page and login form are available
+- the planner page (`/hws`) is available
+- the create task page (`/hws/create`) is available
+
+Run the frontend smoke tests with:
+
+```bash
+npx playwright test --config=playwright.smoke.config.js
+```
+
+Currently, all smoke tests are passing:
+
+- **5 backend smoke tests**
+- **3 frontend smoke tests**
+
+Smoke tests only cover the most important functionality and do not replace the existing unit, integration or end-to-end tests.
 
 ### Flaky Test Strategy
 
