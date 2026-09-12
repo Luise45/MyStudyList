@@ -16,5 +16,17 @@ await expect(
     page.getByText('MyStudyList helps you keep every task visible and organized.')).toBeVisible();
 });
 
+// Testing if the UI shows the login button on the home page
+  test('login page shows the required controls', async ({ page }) => {
+    await page.goto('/login');
+    await expect(
+      page.getByRole('heading', { name: /login/i })
+    ).toBeVisible();
 
+    await expect(page.getByLabel(/email/i)).toBeVisible();
+    await expect(page.getByLabel(/password/i)).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: /login/i })
+    ).toBeVisible();
+  });
 

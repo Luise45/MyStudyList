@@ -41,10 +41,20 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage-report
-          path: ./frontend/coverage/
+          path: ./frontend/coverage/ 
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
           
-  # JOB 2: Backend Tests
+      # 6. Upload frontend coverage to Codecov
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # Path from the ROOT directory!
+          files: ./frontend/coverage/frontend/lcov.info # Path to Karma coverage file
+          flags: frontend
+          fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
+ 
+   # JOB 2: Backend Tests
   backend-tests:
     runs-on: ubuntu-latest
     defaults:
@@ -72,7 +82,16 @@ jobs:
       - name: Run Backend Tests and Check Coverage
         run: npm run test:coverage -- --runInBand
 
-  # JOB 3: E2E Tests (Playwright)
+      # 5. Upload backend coverage to Codecov
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info # Path to Jest coverage file
+          flags: backend
+          fail_ci_if_error: false
+          
+   # JOB 3: E2E Tests (Playwright)
   e2e-tests:
     runs-on: ubuntu-latest
     env:
@@ -91,6 +110,10 @@ jobs:
       # Backend needs its dependencies so the server can run
       - name: Install Backend Dependencies
         working-directory: ./backend
+        run: npm ci
+        
+      - name: Install frontend dependencies
+        working-directory: ./frontend
         run: npm ci
 
       # Playwright is installed in the project root
