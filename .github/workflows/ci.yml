@@ -1,4 +1,4 @@
-name: CI Pipeline (Testing)
+name: CI Pipeline (Testing & Coverage)
 
 # Trigger: Whenever code is pushed or a pull request is created
 on:
@@ -41,9 +41,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage-report
-          path: ./frontend/coverage/
+          path: ./frontend/coverage/ 
           retention-days: 7  # Keep these uploaded files for 7 days, and then automatically delete them to free up storage space.
- 
+          
+      # 6. Upload frontend coverage to Codecov
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # Path from the ROOT directory!
+          files: ./frontend/coverage/frontend/lcov.info # Path to Karma coverage file
+          flags: frontend
+          fail_ci_if_error: false # So that the pipeline does not break if Codecov is down
  
    # JOB 2: Backend Tests
   backend-tests:
@@ -73,7 +82,15 @@ jobs:
       - name: Run Backend Tests and Check Coverage
         run: npm run test:coverage -- --runInBand
 
-# Job 3. e2e 
+      # 5. Upload backend coverage to Codecov
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info # Path to Jest coverage file
+          flags: backend
+          fail_ci_if_error: false
+
   e2e-tests:
     runs-on: ubuntu-latest
     env:

@@ -4,6 +4,7 @@
 ![Databse Diagram ](https://img.shields.io/badge/Angular-yellow)
 ![Databse Diagram ](https://img.shields.io/badge/MongoDB-green)
 ![CI Pipeline](https://github.com/Luise45/MyStudyList/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/Luise45/MyStudyList/branch/main/graph/badge.svg)](https://codecov.io/gh/Luise45/MyStudyList)
 
 
 
@@ -199,4 +200,5 @@ To ensure code quality, prevent regressions, and automate our workflow, we have 
 ### Pipeline Jobs
 1. **Frontend Tests:** Sets up Node.js, installs dependencies, runs Angular unit tests with coverage reporting, and automatically uploads the coverage report as a downloadable artifact for review.
 2. **Backend Tests:** Sets up Node.js, installs dependencies, and runs Jest tests sequentially (`--runInBand`) to ensure stability and prevent Out-Of-Memory errors in the CI environment.
+3. **Coverage Tracking:** We use [Codecov](https://codecov.io/) to automatically track, visualize, and monitor our test coverage over time, ensuring code quality remains high and preventing regressions.
 
