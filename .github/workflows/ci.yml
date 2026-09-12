@@ -110,6 +110,10 @@ jobs:
       - name: Install Backend Dependencies
         working-directory: ./backend
         run: npm ci
+        
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
 
     # Playwright is installed in the project root
       - name: Install E2E Dependencies
