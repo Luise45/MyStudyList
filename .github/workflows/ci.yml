@@ -1,4 +1,4 @@
-name: CI Pipeline (Testing)
+name: CI/CD Pipeline (Testing, Coverage & Deployment)
 
 # Trigger: Whenever code is pushed or a pull request is created
 on:
