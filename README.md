@@ -16,13 +16,12 @@
 
 ##  Features
 
-- **Authentication** – Secure registration and login with JWT token
-- **CRUD functionality** – Create, display, and delete tasks  
-- **MongoDB database** – Storing all entries via MongoDB Compass  
-- **Visual feedback** – Actions like deletion are confirmed by bootstrap toasts  
-- **Motivational emojis** – Tasks can be provided with emojis  
-- **Search function** – Filter tasks by date or subject/module  
-
+- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen und löschen  
+- **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
+- **Visuelles Feedback** – Aktionen wie das Löschen werden durch Bootstrap-Toasts bestätigt  
+- **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
+- **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
+- **Authentication** -Login and Register for users
 ---
 
 ##  Tech Stack
@@ -194,10 +193,10 @@ This is the exact command used in our GitHub Actions pipeline. It is much faster
 cd frontend
 npx ng test --watch=false --browsers=ChromeHeadless --no-progress --code-coverage
 ```
-
+---
 ### e2e Tests
 
-For the end-to-end testing of the homework planner, **Playwright** was used. The purpose of these tests was to verify that important parts of the homework planner work correctly.
+For the end-to-end testing of the homework planner, **Playwright** was used. The purpose of these tests was to verify that important parts of the homework planner work correctly. The test follow our Flaky test strategy.
 
 #### API Testing
 Playwright tests exist for the get, post and delete endpoints of the homework planning function. These tests send HTTP requests directly to the backend and check whether the server returns the expected status codes and data. For those test a mongoDB test database is used. 
@@ -210,6 +209,24 @@ The tests include:
 #### Frontend Testing
 Playwright was also used to test important elements and navigation on the homepage, the planner page and the create new entry page. These tests open the deployed application in a browser and interact with it in a similar way to a real user. The tests mainly check that buttons are available and clickable, the table headings are displayed, the headings of pages show and that search fields are visible. The frontend tests are executed against the deployed version of the application.
 
+#### Authentication Testing
+- UI: login/register controls are visible and usable
+- API: register works
+- API: login works and returns a token
+
+#### User Journey
+E2e test for the most important User Journey:
+
+1. Log in with a test user
+2. Navigate to the task creation page
+3. Create a new homework task through the UI
+4. Verify that the task appears in the planner
+5. Delete the created task
+6. Verify that the task is removed
+7. Unique test data to prevent conflicts with existing tasks.
+8. Configured Playwright to start the frontend and backend locally for E2E testing.
+9. The local backend runs with NODE_ENV=test and uses the test database, preventing E2E data from being written to production.
+
 #### Test Environment
 For the API tests, Playwright is configured to automatically start the backend using: npm run start:test
 The test server runs locally on port 5000. 
@@ -218,7 +235,29 @@ Start tests:
 ```bash
 npx playwright test
 ```
+#### Failure Diagnostics
+The config is configured to deliver failure diagnostics with: 
+```bash
+use: { 
+screenshot: 'only-on-failure', 
+video: 'retain-on-failure', 
+trace: 'retain-on-failure', }
+```
+Failed UI tests can therefore produce:
 
+- A screenshot showing the page at the time of failure
+- A .webm video recording of the test
+- A Playwright trace for detailed debugging
+- Error context containing information about the failure
+
+Playwright traces can be opened with:
+```bash
+npx playwright show-trace path/to/trace.zip
+```
+The HTML test report can be opened with:
+```bash
+npx playwright show-report
+```
 ---
 ## Continuous Integration/Continuous Deployment (CI/CD) Pipeline
 

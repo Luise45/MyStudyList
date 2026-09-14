@@ -97,5 +97,15 @@ router.post('/login', async (req, res) => {
     });
   }
 });
-
+// delete user enpoit used in e2e testing to delete the user afet the test is done. This is only available in test environment
+if (process.env.NODE_ENV === 'test') {
+  router.delete('/test/users/:id', async (req, res) => {
+    try {
+      await User.findByIdAndDelete(req.params.id);
+      res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to delete user' });
+    }
+  });
+}
 module.exports = router;

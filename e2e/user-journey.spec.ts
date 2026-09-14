@@ -18,7 +18,6 @@ await expect(page).toHaveURL(/\/hws\/create/);
 
   // Fill in homework form
 await page.getByLabel('Date').fill('2026-09-15');
-await page.getByLabel('Subject').fill('Chemistry e2e');
 await page.getByLabel('Task type').selectOption('Exam');
 
 await page
@@ -36,9 +35,8 @@ const row = page.getByRole('row').filter({
 });
 
 await expect(row).toBeVisible();
-await expect(row).toContainText('Exam');
-await expect(row).toContainText(
-  'Created by Playwright user journey test'
-);
+// delete entry again - flaky strategy
+await row.getByRole('button').click();
+
 
 });

@@ -19,7 +19,6 @@ import path from 'path';
 
 export default defineConfig({
 
-
   webServer: [
     {
       command: 'npm run start:test',
@@ -40,6 +39,9 @@ export default defineConfig({
 
   use: {
     baseURL: 'http://localhost:4200',
+     screenshot: 'only-on-failure',
+     video: 'retain-on-failure',
+     trace: 'retain-on-failure'
   },
 
 
