@@ -1,23 +1,32 @@
 import { test, expect } from '@playwright/test';
 
 
-// post endpoint testing for creating a new homework
+// post endpoint testing for creating a new homework and delte endpoint testing -flaky strategy
 test('should create a new homework entry', async ({ request }) => {
-const response = await request.post('http://127.0.0.1:5000/api/hws', {
-    data: {
-      date: '2026-09-10',
-      subject: 'Math',
-      task_type: 'Test',
-      notes: 'Complete exercises 1-10'
+const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
+    {
+      data: {
+        date: '2026-09-10',
+        subject: 'Math',
+        task_type: 'Test for Post',
+        notes: 'Complete exercises 1-10'
+      }
     }
-  });
+  );
 
-  expect(response.status()).toBe(201);
-  const body = await response.json();
-  expect(body.message).toBe('Hw uploaded successfully');
-  expect(body.hw.subject).toBe('Math');
-  expect(body.hw.task_type).toBe('Test');
-  expect(body.hw.notes).toBe('Complete exercises 1-10');
+  expect(createResponse.status()).toBe(201);
+  const body1 = await createResponse.json();
+  expect(body1.message).toBe('Hw uploaded successfully');
+  expect(body1.hw.subject).toBe('Math');
+  expect(body1.hw.task_type).toBe('Test for Post');
+  expect(body1.hw.notes).toBe('Complete exercises 1-10');
+  const id = body1.hw._id;
+  expect(id).toBeTruthy();
+  const deleteResponse = await request.delete(`http://127.0.0.1:5000/api/hws/${id}`
+  );
+  expect(deleteResponse.status()).toBe(200);
+  const body = await deleteResponse.json();
+  expect(body.message).toBe('HW deleted successfully');
 });
 
 
