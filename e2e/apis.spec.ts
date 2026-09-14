@@ -29,19 +29,34 @@ const response = await request.post('http://127.0.0.1:5000/api/hws', {
   expect(Array.isArray(body)).toBe(true);
   });
 
+//Should not depend on existing data -flaky strategy
+ test('GET /:id - returns one HW entry', async ({ request }) => {
+  const createResponse = await request.post(
+    'http://127.0.0.1:5000/api/hws',
+    {
+      data: {
+        date: '2026-09-10',
+        subject: 'Physics',
+        task_type: 'Test',
+        notes: 'Created for GET by ID test'
+      }
+    }
+  );
 
-  // GET endpoint testing by id 
-  test('GET /:id - returns one HW entry', async ({ request }) => {
-  const allResponse = await request.get('http://127.0.0.1:5000/api/hws');
-  expect(allResponse.status()).toBe(200);
-  const allHw = await allResponse.json();
-  expect(allHw.length).toBeGreaterThan(0);
-  const id = allHw[0]._id;
-  const response = await request.get(`http://127.0.0.1:5000/api/hws/${id}`);
+  expect(createResponse.status()).toBe(201);
+  const created = await createResponse.json();
+  const id = created.hw._id;
+  const response = await request.get(
+    `http://127.0.0.1:5000/api/hws/${id}`
+  );
   expect(response.status()).toBe(200);
   const hw = await response.json();
   expect(hw._id).toBe(id);
-  });
+  expect(hw.subject).toBe('Physics');
+  await request.delete(
+    `http://127.0.0.1:5000/api/hws/${id}`
+  );
+});
 
   // Get hw by id to error
   test('GET /:id - returns 404 when HW does not exist', async ({request,}) => {
