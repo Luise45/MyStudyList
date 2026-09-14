@@ -86,8 +86,8 @@ describe('HomePage', () => {
     // --- HTTP REQUEST TESTS (login & register) ---
 
   describe('login()', () => {
-    it('should clear message before making login request', () => {
-      // Arrange: There is an old message
+        it('should clear message before making login request', () => {
+      // Arrange
       component.message = 'Old error message';
       component.email = 'test@example.com';
       component.password = 'password123';
@@ -95,8 +95,12 @@ describe('HomePage', () => {
       // Act
       component.login();
       
-      // Assert: Message should be cleared
+      // Assert: Message should be cleared immediately
       expect(component.message).toBe('');
+      
+      // Cleanup: Mock the HTTP response to prevent "open request" error in afterEach
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/login`);
+      req.flush({ token: 'mock-token' });
     });
 
     it('should send POST request to login endpoint with credentials', () => {
@@ -173,14 +177,21 @@ describe('HomePage', () => {
   });
 
   describe('register()', () => {
-    it('should clear message before making register request', () => {
+        it('should clear message before making register request', () => {
+      // Arrange
       component.message = 'Old error message';
       component.email = 'new@example.com';
       component.password = 'password123';
       
+      // Act
       component.register();
       
+      // Assert: Message should be cleared immediately
       expect(component.message).toBe('');
+      
+      // Cleanup: Mock the HTTP response to prevent "open request" error in afterEach
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/register`);
+      req.flush({});
     });
 
     it('should send POST request to register endpoint', () => {
