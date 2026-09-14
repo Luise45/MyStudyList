@@ -192,10 +192,11 @@ jobs:
       - name: Deploy Backend to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: mystudylist-backend # Exactly the name of our service in the cloud
+          service: mystudylist-backend
           region: '${{ secrets.GCP_REGION }}'
-          source: ./backend # Path to the folder with the Dockerfile
+          source: ./backend
+          flags: '--clear-base-image'
           env_vars: |
             NODE_ENV=production
             MONGO_URI=${{ secrets.MONGO_URI }}
-            JWT_SECRET=${{ secrets.JWT_SECRET }} 
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
