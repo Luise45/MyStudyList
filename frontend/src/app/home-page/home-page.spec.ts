@@ -82,4 +82,174 @@ describe('HomePage', () => {
       expect(component.message).toBe('');          // Expectation
     });
   });
+
+    // --- HTTP REQUEST TESTS (login & register) ---
+
+  describe('login()', () => {
+    it('should clear message before making login request', () => {
+      // Arrange: There is an old message
+      component.message = 'Old error message';
+      component.email = 'test@example.com';
+      component.password = 'password123';
+      
+      // Act
+      component.login();
+      
+      // Assert: Message should be cleared
+      expect(component.message).toBe('');
+    });
+
+    it('should send POST request to login endpoint with credentials', () => {
+      // Arrange: Set test data
+      component.email = 'test@example.com';
+      component.password = 'password123';
+      
+      // Act: Call login method
+      component.login();
+
+      // Assert: Expect and verify HTTP request
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/login`);
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual({
+        email: 'test@example.com',
+        password: 'password123'
+      });
+      
+      // Send mock response (to "complete" the request)
+      req.flush({ token: 'fake-jwt-token' });
+    });
+
+    it('should store token and navigate on successful login', () => {
+      // Spy on localStorage.setItem to check if it is called
+      spyOn(localStorage, 'setItem');
+      
+      component.email = 'test@example.com';
+      component.password = 'password123';
+      component.login();
+
+      // Simulate mock response from server
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/login`);
+      req.flush({ token: 'mock-token-123' });
+
+      // Assert: Token was stored
+      expect(localStorage.setItem).toHaveBeenCalledWith('token', 'mock-token-123');
+      // Assert: Navigation to /hws was triggered
+      expect(router.navigate).toHaveBeenCalledWith(['hws']);
+    });
+
+    it('should set error message when login fails', () => {
+      component.email = 'test@example.com';
+      component.password = 'wrongpassword';
+      component.login();
+
+      // Mock error response from server (401 Unauthorized)
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/login`);
+      req.flush(
+        { message: 'Invalid credentials' },
+        { status: 401, statusText: 'Unauthorized' }
+      );
+
+      // Assert: Error message was set
+      expect(component.message).toBe('Invalid credentials');
+      // Assert: No navigation on error
+      expect(router.navigate).not.toHaveBeenCalled();
+    });
+
+    it('should set default error message when login fails without message', () => {
+      component.email = 'test@example.com';
+      component.password = 'wrongpassword';
+      component.login();
+
+      // Mock error without specific message
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/login`);
+      req.flush(
+        {},
+        { status: 500, statusText: 'Internal Server Error' }
+      );
+
+      // Assert: Default error message was set
+      expect(component.message).toBe('Login failed');
+    });
+  });
+
+  describe('register()', () => {
+    it('should clear message before making register request', () => {
+      component.message = 'Old error message';
+      component.email = 'new@example.com';
+      component.password = 'password123';
+      
+      component.register();
+      
+      expect(component.message).toBe('');
+    });
+
+    it('should send POST request to register endpoint', () => {
+      component.email = 'new@example.com';
+      component.password = 'password123';
+      component.register();
+
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/register`);
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual({
+        email: 'new@example.com',
+        password: 'password123'
+      });
+      
+      req.flush({});
+    });
+
+    it('should show success message and reset form on successful registration', () => {
+      component.isRegistering = true;
+      component.email = 'new@example.com';
+      component.password = 'password123';
+      component.register();
+
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/register`);
+      req.flush({});
+
+      // Assert: Success message was displayed
+      expect(component.message).toBe('Account created!');
+      // Assert: Mode was reset (back to login)
+      expect(component.isRegistering).toBeFalse();
+      // Assert: Password field was cleared
+      expect(component.password).toBe('');
+    });
+
+    it('should set error message when registration fails', () => {
+      component.email = 'existing@example.com';
+      component.password = 'password123';
+      component.register();
+
+      // Mock error: Email already exists (409 Conflict)
+      const req = httpMock.expectOne(`${component['apiUrl']}/api/auth/register`);
+      req.flush(
+        { message: 'Email already exists' },
+        { status: 409, statusText: 'Conflict' }
+      );
+
+      expect(component.message).toBe('Email already exists');
+    });
+  });
+
+  describe('submit()', () => {
+    it('should call login() when isRegistering is false', () => {
+      // Spy on the login method
+      spyOn(component, 'login');
+      
+      component.isRegistering = false;
+      component.submit();
+      
+      expect(component.login).toHaveBeenCalled();
+    });
+
+    it('should call register() when isRegistering is true', () => {
+      // Spy on the register method
+      spyOn(component, 'register');
+      
+      component.isRegistering = true;
+      component.submit();
+      
+      expect(component.register).toHaveBeenCalled();
+    });
+  });
 });
