@@ -1,36 +1,40 @@
 # MyStudyList 
 
-![Databse Diagram ](https://img.shields.io/badge/Node/Express-blue)
-![Databse Diagram ](https://img.shields.io/badge/Angular-yellow)
-![Databse Diagram ](https://img.shields.io/badge/MongoDB-green)
+![Node/Express](https://img.shields.io/badge/Node/Express-339933)
+![Angular](https://img.shields.io/badge/Angular-DD0031)
+![MongoDB](https://img.shields.io/badge/MongoDB-green)
+![Docker](https://img.shields.io/badge/Docker-blue)
 ![CI Pipeline](https://github.com/Luise45/MyStudyList/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/Luise45/MyStudyList/branch/main/graph/badge.svg)](https://codecov.io/gh/Luise45/MyStudyList)
 
 
 
 
-**MyStudyList** ist ein digitaler Hausaufgabenplaner, mit dem man alle Aufgaben effizient verwalten kann. Die App richtet sich an Schüler\*innen und Studierende und unterstützt dabei, das Lernen einfach und strukturiert zu planen.
+**MyStudyList** is a digital homework planner that allows you to manage all your tasks efficiently. Aimed at school and university students, the app helps keep your studies simple and organized.
 
 ---
 
 ##  Features
 
-- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen und löschen  
-- **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
-- **Visuelles Feedback** – Aktionen wie das Löschen werden durch Bootstrap-Toasts bestätigt  
-- **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
-- **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
+- **Authentication** – Secure registration and login with JWT token
+- **CRUD functionality** – Create, display, and delete tasks  
+- **MongoDB database** – Storing all entries via MongoDB Compass  
+- **Visual feedback** – Actions like deletion are confirmed by bootstrap toasts  
+- **Motivational emojis** – Tasks can be provided with emojis  
+- **Search function** – Filter tasks by date or subject/module  
 
 ---
 
-##  Verwendete Technologien
+##  Tech Stack
 
-| Bereich    | Technologie                            |
+| Stack      | Technology                             |
 |------------|----------------------------------------|
 | Frontend   | Angular CLI v20.0.5                    |
 | Backend    | Node.js v22.15.1, Express.js           |
 | Datenbank  | MongoDB Compass v6.0.24                |
 | Styling    | Bootstrap 5                            |
+| CI/CD      | GitHub Actions                         |
+| Container  | Docker                                 |
 
 --- 
 
@@ -38,8 +42,13 @@
 
 The frontend is hosted with Firebase Hosting, while the backend API runs as a containerized service on Google Cloud Run. The MongoDB database remains hosted on MongoDB Atlas.
 
-### Manual Deployment Workflow
-At the moment, deployment is performed manually in Google Cloud terminal: 
+### Automated CI/CD Deployment
+Deployment is now fully automated via GitHub Actions. Every merge to the `main` branch triggers:
+1. **Frontend:** Automatically builds and deploys to **Firebase Hosting**.
+2. **Backend:** Automatically builds the Docker image and deploys it to **Google Cloud Run** (Region: `europe-west1`), injecting all necessary environment variables (`MONGO_URI`, `JWT_SECRET`).
+
+*(Manual deployment is still possible via the commands below if needed, but is no longer the primary workflow).*
+
 ```bash
 cd MyStudyList
 git pull
@@ -163,11 +172,11 @@ Our frontend is tested using **Jasmine** and **Karma**. We focus on isolated uni
 - **Components:** Services are mocked using spies, and a minimal router is provided for testing
 
 **Frontend Test Coverage:**
-We currently maintain a **98% code coverage** across the frontend:
-- **Statements:** 98.36%
-- **Branches:** 78.57%
-- **Lines:** 98.27%
-- **Functions:** 96.29%
+We currently maintain a **>98% code coverage** across the frontend:
+- **Statements:** 98.86%
+- **Branches:** 80%
+- **Lines:** 98.8%
+- **Functions:** 97.22%
 
 ### Running Tests Locally
 There are two ways to run the frontend tests, depending on your goal:
@@ -211,14 +220,16 @@ npx playwright test
 ```
 
 ---
-## Continuous Integration (CI) Pipeline
+## Continuous Integration/Continuous Deployment (CI/CD) Pipeline
 
-To ensure code quality, prevent regressions, and automate our workflow, we have implemented a **GitHub Actions** CI pipeline. It triggers automatically on every push to `main` or `dev`, and on every Pull Request targeting `main`.
+To ensure code quality, prevent regressions, and automate our workflow, we have implemented a **GitHub Actions** CI/CD pipeline. It triggers automatically on every push to `main` or `dev`, and on every Pull Request targeting `main`.
 
 ### Pipeline Jobs
 1. **Frontend Tests:** Sets up Node.js, installs dependencies, runs Angular unit tests with coverage reporting, and automatically uploads the coverage report as a downloadable artifact for review.
 2. **Backend Tests:** Sets up Node.js, installs dependencies, and runs Jest tests sequentially (`--runInBand`) to ensure stability and prevent Out-Of-Memory errors in the CI environment.
 3. **Coverage Tracking:** We use [Codecov](https://codecov.io/) to automatically track, visualize, and monitor our test coverage over time, ensuring code quality remains high and preventing regressions.
+4. **Deploy Frontend:** Builds the Angular application for production and deploys it to Firebase Hosting (only on `main` branch merges).
+5. **Deploy Backend:** Authenticates with Google Cloud, builds the Docker image from the `./backend` directory, and deploys it to Google Cloud Run with production environment variables (only on `main` branch merges).
 
 
 ### Smoke Tests
