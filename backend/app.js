@@ -53,7 +53,7 @@ mongoose.connect(mongoUri)
     console.log(
       `MongoDB connected (${process.env.NODE_ENV === 'test' ? 'test' : 'production'})`
     );
- console.log('Actual MongoDB database:', mongoose.connection.name);
+ 
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
          
