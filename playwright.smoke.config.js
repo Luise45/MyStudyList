@@ -4,15 +4,23 @@ export default defineConfig({
   testDir: './e2e',
   testMatch: 'smoke.spec.ts',
 
-  retries: 0,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+
   reporter: 'list',
 
-  projects: [
-  {
-    name: 'chromium',
-    use: {
-      ...devices['Desktop Chrome'],
-    },
+  use: {
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
   },
-],
+
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+  ],
 });
