@@ -14,17 +14,7 @@
 
 ---
 
-##  Features
-
-- **CRUD-Funktionalität** – Aufgaben erstellen, anzeigen und löschen  
-- **MongoDB-Datenbank** – Speicherung aller Einträge über MongoDB Compass  
-- **Visuelles Feedback** – Aktionen wie das Löschen werden durch Bootstrap-Toasts bestätigt  
-- **Motivations-Emojis** – Aufgaben können mit Emojis versehen werden  
-- **Suchfunktion** – Aufgaben nach Datum oder Fach/Modul filtern  
-- **Authentication** -Login and Register for users
----
-
-##  Tech Stack
+###  Tech Stack
 
 | Stack      | Technology                             |
 |------------|----------------------------------------|
