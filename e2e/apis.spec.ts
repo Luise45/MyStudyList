@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+test.describe('Homework API', () => {
+  const API_URL = 'http://127.0.0.1:5000';
 
 // post endpoint testing for creating a new homework and delte endpoint testing -flaky strategy
 test('should create a new homework entry', async ({ request }) => {
-const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
+const createResponse = await request.post(`${API_URL}/api/hws`,
     {
       data: {
         date: '2026-09-10',
@@ -22,7 +24,7 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
   expect(body1.hw.notes).toBe('Complete exercises 1-10');
   const id = body1.hw._id;
   expect(id).toBeTruthy();
-  const deleteResponse = await request.delete(`http://127.0.0.1:5000/api/hws/${id}`
+  const deleteResponse = await request.delete(`${API_URL}/api/hws/${id}`
   );
   expect(deleteResponse.status()).toBe(200);
   const body = await deleteResponse.json();
@@ -32,7 +34,7 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
 
 // GET endpooint testing
   test('GET / - returns all HW entries', async ({ request }) => {
-  const response = await request.get('http://127.0.0.1:5000/api/hws');
+  const response = await request.get(`${API_URL}/api/hws`);
   expect(response.status()).toBe(200);
   const body = await response.json();
   expect(Array.isArray(body)).toBe(true);
@@ -41,7 +43,7 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
 //Should not depend on existing data -flaky strategy
  test('GET /:id - returns one HW entry', async ({ request }) => {
   const createResponse = await request.post(
-    'http://127.0.0.1:5000/api/hws',
+    `${API_URL}/api/hws`,
     {
       data: {
         date: '2026-09-10',
@@ -56,14 +58,14 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
   const created = await createResponse.json();
   const id = created.hw._id;
   const response = await request.get(
-    `http://127.0.0.1:5000/api/hws/${id}`
+    `${API_URL}/api/hws/${id}`
   );
   expect(response.status()).toBe(200);
   const hw = await response.json();
   expect(hw._id).toBe(id);
   expect(hw.subject).toBe('Physics');
   await request.delete(
-    `http://127.0.0.1:5000/api/hws/${id}`
+    `${API_URL}/api/hws/${id}`
   );
 });
 
@@ -71,7 +73,7 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
   test('GET /:id - returns 404 when HW does not exist', async ({request,}) => {
   const nonExistingId = '000000000000000000000000';
   const response = await request.get(
-      `http://127.0.0.1:5000/api/hws/${nonExistingId}`
+      `${API_URL}/api/hws/${nonExistingId}`
     );
   expect(response.status()).toBe(404);
   const body = await response.json();
@@ -81,7 +83,7 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
   
  // Delete endpoint testing
   test('DELETE /:id - deletes one HW entry', async ({ request }) => {
-  const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
+  const createResponse = await request.post(`${API_URL}/api/hws`,
     {
       data: {
         date: '2026-09-10',
@@ -100,9 +102,10 @@ const createResponse = await request.post('http://127.0.0.1:5000/api/hws',
   expect(body1.hw.notes).toBe('Complete exercises 1-10');
   const id = body1.hw._id;
   expect(id).toBeTruthy();
-  const deleteResponse = await request.delete(`http://127.0.0.1:5000/api/hws/${id}`
+  const deleteResponse = await request.delete(`${API_URL}/api/hws/${id}`
   );
   expect(deleteResponse.status()).toBe(200);
   const body = await deleteResponse.json();
   expect(body.message).toBe('HW deleted successfully');
+});
 });
