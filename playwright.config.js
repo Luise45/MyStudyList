@@ -69,7 +69,7 @@ export default defineConfig({
     ...devices['Desktop Edge'],
     channel: 'msedge',
   },
-      },
+      }
   
     
 
